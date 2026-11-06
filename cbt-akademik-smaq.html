@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="color-scheme" content="light dark"/>
+<link rel="icon" href="data:,"/>
+<title>CBT Tes Akademik SMAQ Darul Fattah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Amiri:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f7f5; --bg2:#eef4f0; --card:#ffffff; --card2:#f8faf9;
+  --text:#13201a; --muted:#5b6b62; --line:#dbe7df;
+  --green:#0e6b4f; --green2:#0a4f3a; --green-soft:#e2f1e9;
+  --gold:#c79a2b; --gold-soft:#fdf3d7;
+  --red:#b42318; --red-soft:#fdecea; --red-line:#f3c6c0;
+  --ok:#067647; --ok-soft:#e6f4ea; --ok-line:#a6d8b8;
+  --shadow:0 10px 30px rgba(10,60,40,.08);
+  --radius:18px;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0d1512; --bg2:#101b16; --card:#16221c; --card2:#1a2921; --text:#edf5f0; --muted:#a7bcb0; --line:#26392f; --green:#2fbf8f; --green2:#7fe3bd; --green-soft:#17362a; --gold:#e6c15a; --gold-soft:#2e2a16; --red:#ff8a7a; --red-soft:#3a1d1a; --red-line:#5c2e29; --ok:#6fe3a5; --ok-soft:#143626; --ok-line:#235c3d; --shadow:0 10px 30px rgba(0,0,0,.35);}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Plus Jakarta Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);color:var(--text);min-height:100vh}
+a{color:var(--green)}
+.wrap{max-width:980px;margin:0 auto;padding:20px 16px 56px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0 14px}
+.brand-mini{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.02em;font-size:13px;text-transform:uppercase;color:var(--muted)}
+.brand-mini b{color:var(--text);text-transform:none;letter-spacing:0;font-size:14px}
+.dot{width:36px;height:36px;border-radius:10px;background:var(--green);color:#fff;display:grid;place-items:center;font-family:Amiri,serif;font-size:19px;line-height:1}
+.pill{font-size:12px;font-weight:700;background:var(--card);border:1px solid var(--line);padding:7px 10px;border-radius:999px;color:var(--muted)}
+.hero{background:var(--green2);color:#fff;border-radius:22px;padding:26px 22px;position:relative;overflow:hidden}
+@media(prefers-color-scheme:dark){.hero{background:#123528}}
+.hero:after{content:"";position:absolute;right:-40px;top:-40px;width:190px;height:190px;border-radius:50%;background:rgba(255,255,255,.08)}
+.hero .arab{font-family:Amiri,serif;font-size:22px;opacity:.95}
+.hero h1{margin:8px 0 8px;font-size:28px;line-height:1.15;letter-spacing:-.02em;max-width:640px}
+.hero p{margin:0;opacity:.92;line-height:1.6;max-width:640px;font-size:15px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;position:relative;z-index:1}
+.hero-meta span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:7px 10px;border-radius:999px;font-size:12.5px;font-weight:700}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-top:16px}
+.card h2{margin:0 0 6px;font-size:20px;letter-spacing:-.01em}
+.card h3{margin:0 0 6px;font-size:16px}
+.sub{color:var(--muted);line-height:1.6;font-size:14.5px;margin:0}
+label{font-weight:700;font-size:13.5px;display:block;margin:14px 0 7px}
+input[type=text]{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--card2);color:var(--text);font:inherit;font-size:15px;outline:none}
+input[type=text]:focus{border-color:var(--green);box-shadow:0 0 0 4px var(--green-soft)}
+.btn{appearance:none;border:0;cursor:pointer;font:inherit;font-weight:800;border-radius:12px;padding:13px 18px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn-primary{background:var(--green);color:#fff;width:100%}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed}
+.btn-gold{background:var(--gold);color:#1a1400}
+.btn-ghost{background:var(--card);color:var(--text);border:1.5px solid var(--line)}
+.btn-sm{padding:10px 14px;font-size:14px;width:auto}
+.note{background:var(--gold-soft);border:1px solid #ead9a0;border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.6;color:#5c4a08;margin-top:14px}
+@media(prefers-color-scheme:dark){.note{color:#f2d98a;border-color:#4a3f1a}}
+.grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:14px}
+@media(min-width:680px){.grid{grid-template-columns:1fr 1fr}}
+.subject{border:1.5px solid var(--line);background:var(--card);border-radius:16px;padding:16px;display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;cursor:pointer;font:inherit;color:var(--text)}
+.subject:hover{border-color:var(--green)}
+.subject.done{border-color:var(--ok-line);background:var(--ok-soft);cursor:default}
+.subject .ic{width:48px;height:48px;flex:0 0 48px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:var(--green-soft)}
+.subject.done .ic{background:#fff}
+@media(prefers-color-scheme:dark){.subject.done .ic{background:var(--card)}}
+.subject strong{font-size:15.5px;display:block;line-height:1.3}
+.subject small{color:var(--muted);line-height:1.5;display:block;margin-top:3px;font-size:13px}
+.badge{margin-left:auto;flex:0 0 auto;font-size:12px;font-weight:800;padding:6px 9px;border-radius:999px;background:var(--card2);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.badge.done{background:var(--green);color:#fff;border-color:var(--green)}
+.progress{height:10px;background:var(--line);border-radius:999px;overflow:hidden;margin-top:10px}
+.progress i{display:block;height:100%;background:var(--green);width:0%}
+.progress-row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-weight:700;margin-top:14px}
+.sticky{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 92%, transparent);backdrop-filter:blur(8px);padding:10px 0 8px;margin:0 -4px}
+.exam-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.nums{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.nums button{width:36px;height:36px;border-radius:9px;border:1.5px solid var(--line);background:var(--card);color:var(--text);font-weight:800;cursor:pointer;font:inherit;font-size:13px}
+.nums button.answered{background:var(--green);color:#fff;border-color:var(--green)}
+.nums button.current{outline:3px solid var(--gold-soft);border-color:var(--gold)}
+.qbox{margin-top:16px}
+.qmeta{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--green)}
+.qtext{font-size:17px;line-height:1.65;font-weight:600;margin:8px 0 4px;white-space:pre-line}
+.qpassage{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;line-height:1.65;font-size:14.5px;margin-top:10px;white-space:pre-line}
+.opts{display:grid;gap:10px;margin-top:14px}
+.opt{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:13px 14px;cursor:pointer;line-height:1.55;font-size:15px}
+.opt:hover{border-color:var(--green)}
+.opt.sel{border-color:var(--green);background:var(--green-soft)}
+.opt .letter{width:28px;height:28px;flex:0 0 28px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-weight:800;font-size:13px;background:var(--card)}
+.opt.sel .letter{background:var(--green);color:#fff;border-color:var(--green)}
+.navrow{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.navrow .btn{flex:1}
+.review-item{border:1.5px solid var(--line);border-radius:14px;padding:14px;margin-top:10px;background:var(--card)}
+.review-item.ok{border-color:var(--ok-line)}
+.review-item.wrong{border-color:var(--red-line)}
+.review-item .q{font-weight:700;line-height:1.6;font-size:14.5px;white-space:pre-line}
+.ansline{margin-top:8px;font-size:14px;line-height:1.6;color:var(--muted)}
+.ansline b{color:var(--text)}
+.status{font-size:12px;font-weight:800;padding:5px 9px;border-radius:999px;white-space:nowrap}
+.status.ok{background:var(--ok-soft);color:var(--ok);border:1px solid var(--ok-line)}
+.status.wrong{background:var(--red-soft);color:var(--red);border:1px solid var(--red-line)}
+.scorebig{font-size:52px;font-weight:800;letter-spacing:-.04em;line-height:1}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:14.5px}
+th,td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.hidden{display:none!important}
+.flex{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.mt{margin-top:14px}.center{text-align:center}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--green)}
+.footer{color:var(--muted);font-size:12.5px;line-height:1.6;text-align:center;margin-top:22px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:grid;place-items:center;padding:16px;z-index:50}
+.modal-box{background:var(--card);border-radius:18px;padding:20px;max-width:460px;width:100%;box-shadow:var(--shadow)}
+.modal-box h3{margin:0 0 8px}
+@media(max-width:520px){.hero h1{font-size:24px}.hero{padding:22px 18px}.card{padding:16px}.navrow .btn{flex:1 1 46%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand-mini"><span class="dot">د</span><span>SPMB 2027/2028<br><b>SMA Qur'an Darul Fattah</b></span></div>
+    <span class="pill">Tes Akademik • CBT</span>
+  </div>
+
+  <section id="screenIdentity">
+    <div class="hero">
+      <div class="arab">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <h1>Tes Akademik CBT<br>SMA Qur'an Darul Fattah</h1>
+      <p>Selamat datang, calon murid baru. Kerjakan tes dengan jujur dan teliti. Kamu bebas memilih mata pelajaran mana yang ingin dikerjakan terlebih dahulu. Setiap soal memiliki lima pilihan jawaban: A, B, C, D, dan E.</p>
+      <div class="hero-meta"><span>7 Mata Pelajaran</span><span>60 Soal • Pilihan A–E</span><span>Nilai Maksimal 100 per Mapel</span></div>
+    </div>
+    <div class="card">
+      <span class="kicker">Langkah 1 — Identitas Peserta</span>
+      <h2 style="margin-top:6px">Isi identitas dulu, ya</h2>
+      <p class="sub">Cukup isi nama lengkap dan asal sekolah. Identitas ini akan tampil di hasil akhir tes kamu.</p>
+      <form id="formIdentity">
+        <label for="inpName">Nama Lengkap</label>
+        <input type="text" id="inpName" placeholder="Contoh: Ahmad Fatih Ramadhan" autocomplete="name" required>
+        <label for="inpSchool">Asal Sekolah</label>
+        <input type="text" id="inpSchool" placeholder="Contoh: SMP Negeri 1 Bandar Lampung / MTs ..." required>
+        <div class="note"><strong>Perhatian:</strong> Jawaban yang benar tidak akan diberitahukan selama ujian berlangsung. Setelah jawaban dikumpulkan, kamu hanya akan melihat soal mana yang <strong>benar</strong> dan mana yang <strong>salah</strong> — kunci jawaban tetap dirahasiakan.</div>
+        <button class="btn btn-primary mt" type="submit">Mulai &amp; Pilih Mata Pelajaran →</button>
+      </form>
+    </div>
+    <p class="footer">Sekolah Qur'an Darul Fattah • Jl. Kopi No. 23 A, Gedungmeneng, Rajabasa, Kota Bandar Lampung<br>Panitia SPMB Tahun Ajaran 2027/2028</p>
+  </section>
+
+  <section id="screenMenu" class="hidden">
+    <div class="card" style="margin-top:0">
+      <span class="kicker">Langkah 2 — Pilih Mata Pelajaran</span>
+      <h2 style="margin-top:6px">Halo, <span id="greetName">Peserta</span> 👋</h2>
+      <p class="sub"><span id="greetSchool"></span> • Pilih mata pelajaran yang ingin kamu kerjakan terlebih dahulu. Urutannya bebas — kerjakan yang paling kamu kuasai dulu juga boleh.</p>
+      <div class="progress-row"><span id="progressLabel">0 dari 7 mapel selesai</span><span id="progressPct">0%</span></div>
+      <div class="progress"><i id="progressBar"></i></div>
+    </div>
+    <div class="grid" id="subjectGrid"></div>
+
+    <div class="card hidden" id="finalCard">
+      <span class="kicker">Hasil Akhir</span>
+      <h2 style="margin-top:6px">🎉 Semua mata pelajaran selesai!</h2>
+      <p class="sub">Berikut rekap nilai akhir kamu. Nilai setiap mata pelajaran dihitung dengan skor maksimal 100.</p>
+      <div class="flex mt" style="align-items:flex-end;gap:18px">
+        <div><div class="sub" style="font-weight:700">RATA-RATA NILAI</div><div class="scorebig" id="avgScore">0</div></div>
+        <div class="sub" style="padding-bottom:8px" id="totalCorrectLabel"></div>
+      </div>
+      <div style="overflow-x:auto">
+      <table><thead><tr><th>Mata Pelajaran</th><th class="num">Benar</th><th class="num">Salah</th><th class="num">Nilai</th></tr></thead><tbody id="finalTable"></tbody></table>
+      </div>
+      <div class="flex mt">
+        <button class="btn btn-gold btn-sm" id="btnDownload">⬇ Unduh Hasil (JPG)</button>
+        <button class="btn btn-ghost btn-sm" id="btnRestart">Ulangi dari Awal</button>
+      </div>
+      <p class="sub mt">Terima kasih sudah mengikuti Tes Akademik CBT SMA Qur'an Darul Fattah. Semoga mendapatkan hasil terbaik!</p>
+    </div>
+  </section>
+
+  <section id="screenExam" class="hidden">
+    <div class="sticky">
+      <div class="exam-head">
+        <div><span class="kicker" id="examSubjectLabel">Mata Pelajaran</span><div style="font-weight:800;font-size:18px" id="examTitle">—</div></div>
+        <span class="pill" id="examCounter">Soal 1 dari 10</span>
+      </div>
+      <div class="progress"><i id="examProgress"></i></div>
+      <div class="nums" id="examNums"></div>
+    </div>
+    <div class="card qbox">
+      <div class="qmeta" id="qMeta">Soal 1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qpassage hidden" id="qPassage"></div>
+      <div class="opts" id="qOpts"></div>
+      <div class="navrow">
+        <button class="btn btn-ghost" id="btnPrev">← Sebelumnya</button>
+        <button class="btn btn-ghost" id="btnNext">Selanjutnya →</button>
+      </div>
+      <button class="btn btn-primary mt" id="btnSubmitExam" disabled>Kumpulkan Jawaban</button>
+      <p class="sub center mt" id="submitHint">Jawab semua soal dulu agar tombol Kumpulkan Jawaban aktif.</p>
+      <button class="btn btn-ghost mt" id="btnBackMenu" style="width:100%">Kembali ke Menu (jawaban tersimpan sementara)</button>
+    </div>
+  </section>
+
+  <section id="screenReview" class="hidden">
+    <div class="card" style="margin-top:0">
+      <span class="kicker">Hasil Mata Pelajaran</span>
+      <h2 style="margin-top:6px" id="reviewTitle">—</h2>
+      <div class="flex mt" style="gap:20px;align-items:flex-end">
+        <div><div class="sub" style="font-weight:700">NILAI AKHIR (MAKS. 100)</div><div class="scorebig" id="reviewScore">0</div></div>
+        <div class="sub" style="padding-bottom:10px" id="reviewSummary"></div>
+      </div>
+      <div class="note">Di bawah ini ditunjukkan soal mana yang kamu jawab <strong>benar</strong> dan mana yang <strong>salah</strong>, beserta jawaban yang kamu pilih. Kunci jawaban yang benar <strong>tidak ditampilkan</strong>.</div>
+    </div>
+    <div id="reviewList"></div>
+    <div class="card">
+      <button class="btn btn-primary" id="btnReviewBack">Kembali ke Menu Mata Pelajaran →</button>
+    </div>
+  </section>
+</div>
+
+<div class="modal hidden" id="modalConfirm">
+  <div class="modal-box">
+    <h3>Kumpulkan jawaban sekarang?</h3>
+    <p class="sub" id="modalText">Pastikan semua jawaban sudah kamu periksa. Setelah dikumpulkan, jawaban mata pelajaran ini tidak dapat diubah lagi.</p>
+    <div class="flex mt">
+      <button class="btn btn-ghost btn-sm" id="btnCancelSubmit" style="flex:1">Periksa Lagi</button>
+      <button class="btn btn-primary btn-sm" id="btnConfirmSubmit" style="flex:1;width:auto">Ya, Kumpulkan</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============ BANK SOAL SMAQ — setiap soal 5 pilihan (A–E) ============
+// answer = indeks jawaban benar (internal, tidak pernah ditampilkan ke peserta)
+var BANK = {
+  indo: { name:"Bahasa Indonesia", icon:"📖", desc:"Teks prosedur, teks deskripsi, huruf kapital pada judul, teks berita & latar cerpen", show:7, questions:[
+    {q:"Bacalah teks prosedur berikut, lalu lengkapi kalimat rumpangnya!", passage:"Cara Membuat Jus Mangga\n1) Kupas mangga dan potong kecil-kecil.\n2) Masukkan potongan mangga ke dalam blender.\n3) Tambahkan air, gula, dan es batu secukupnya.\n4) […] hingga halus dan tercampur rata.\n5) Tuang ke gelas dan sajikan.", opts:["Potonglah mangga","Blender bahan-bahan tersebut","Belilah mangga di pasar","Cuci gelas yang akan digunakan","Simpan mangga di kulkas"], answer:1},
+    {q:"Bacalah teks prosedur berikut, lalu lengkapi kalimat rumpangnya!", passage:"Cara Menanam Cabai di Pot\nPertama, siapkan pot, tanah, dan bibit cabai. Kedua, masukkan tanah ke dalam pot. Ketiga, tanam bibit cabai di tengah pot. […] siram tanaman secara teratur setiap pagi dan sore hari.", opts:["Namun","Sebaliknya","Setelah itu","Meskipun demikian","Oleh karena itu"], answer:2},
+    {q:"Bacalah teks prosedur berikut, lalu lengkapi kalimat rumpangnya!", passage:"Untuk membuat nasi goreng, langkah pertama yang harus dilakukan adalah […] bawang merah, bawang putih, dan cabai hingga harum.", opts:["menumis","merebus","mengukus","memanggang","menjemur"], answer:0},
+    {q:"Bacalah teks deskripsi berikut, lalu lengkapi kalimat rumpangnya!", passage:"Pantai itu sangat indah. Pasirnya putih dan lembut. Air lautnya jernih berwarna […] sehingga batu karang di dasarnya terlihat jelas.", opts:["keruh kecokelatan","biru kehijauan","hitam pekat","merah menyala","abu-abu gelap"], answer:1},
+    {q:"Bacalah teks deskripsi berikut, lalu lengkapi kalimat rumpangnya!", passage:"Perpustakaan sekolahku luas dan nyaman. Rak-rak buku tersusun rapi. Aroma kertas dan suasana yang […] membuatku betah berlama-lama membaca di sana.", opts:["bising dan ramai","pengap dan panas","tenang dan sejuk","gelap dan lembap","kotor dan berantakan"], answer:2},
+    {q:"Perbaikan penulisan huruf kapital pada judul yang tepat adalah …", opts:["Laskar Pelangi karya Andrea Hirata","laskar Pelangi Karya Andrea Hirata","Laskar pelangi karya andrea hirata","LASKAR PELANGI KARYA ANDREA HIRATA","laskar pelangi karya Andrea Hirata"], answer:0},
+    {q:"Judul karangan berikut yang penulisannya sesuai kaidah huruf kapital adalah …", opts:["Keindahan Alam Indonesia Yang Memukau","Keindahan alam Indonesia yang memukau","Keindahan Alam indonesia Yang memukau","keindahan Alam Indonesia yang Memukau","Keindahan Alam Indonesia yang Memukau"], answer:4},
+    {q:"Pengertian teks berita yang paling tepat adalah …", opts:["Teks yang berisi imajinasi dan khayalan pengarang tentang peristiwa masa depan","Teks yang melaporkan peristiwa atau kejadian yang benar-benar terjadi secara aktual dan faktual","Teks yang berisi langkah-langkah melakukan suatu kegiatan secara berurutan","Teks yang menggambarkan suatu objek secara rinci dan jelas","Teks yang berisi pendapat penulis tentang suatu masalah"], answer:1},
+    {q:"Hal utama yang membedakan teks berita dengan teks lainnya adalah …", opts:["Menggunakan bahasa yang puitis dan bermajas","Berisi peristiwa nyata yang baru saja terjadi dan penting diketahui masyarakat","Selalu ditulis dalam bentuk dialog","Ditulis berdasarkan imajinasi pengarang","Berisi petunjuk melakukan sesuatu"], answer:1},
+    {q:"Bacalah kutipan cerpen berikut, lalu tentukan latar tempatnya!", passage:"Suara debur ombak terdengar jelas. Angin bertiup membawa aroma asin. Nelayan-nelayan itu mendorong perahu mereka yang terdampar di pasir, bersiap melaut sebelum matahari terbit.", opts:["Di pegunungan","Di tepi pantai","Di tengah hutan","Di pasar tradisional","Di stasiun kereta"], answer:1},
+    {q:"Bacalah kutipan cerpen berikut, lalu tentukan latar waktunya!", passage:"Lampu-lampu jalan mulai menyala. Satu per satu bintang muncul di langit. Rina mempercepat langkahnya menyusuri jalan yang sepi, takut kemalaman sebelum sampai di rumah.", opts:["Pagi hari","Siang hari","Sore menjelang malam / malam hari","Tengah hari","Menjelang subuh saat fajar menyingsing dengan matahari terbit"], answer:2},
+    {q:"Bacalah kutipan cerpen berikut, lalu tentukan latar suasananya!", passage:"Sejak ayahnya pergi untuk selamanya, rumah itu terasa sepi. Dina duduk termenung di beranda, menatap foto keluarga dengan mata berkaca-kaca.", opts:["Menyenangkan dan gembira","Menegangkan dan mencekam","Sedih dan haru","Lucu dan menghibur","Ramai dan meriah"], answer:2}
+  ]},
+  inggris: { name:"Bahasa Inggris", icon:"🔤", desc:"Comparative & superlative, introducing others, recount text, notice & tenses", show:10, questions:[
+    {q:"Choose the correct comparative form!\n\"My house is … than yours.\"", opts:["big","bigger","biggest","more big","most big"], answer:1},
+    {q:"Choose the correct superlative form!\n\"Mount Everest is the … mountain in the world.\"", opts:["high","higher","highest","more high","most higher"], answer:2},
+    {q:"Choose the correct form!\n\"This book is … interesting than that one.\"", opts:["most","more","much","many","more than"], answer:1},
+    {q:"Read the text and answer the question!", passage:"Hello, everyone. Let me introduce my friend. His name is Rizky Pratama. He is fifteen years old. He studies at SMPN 2 Bandar Lampung. He lives in Rajabasa with his parents. His hobby is playing football.\n\nHow old is Rizky?", opts:["Fourteen years old","Fifteen years old","Sixteen years old","Thirteen years old","Seventeen years old"], answer:1},
+    {q:"Read the text and answer the question!", passage:"Hello, everyone. Let me introduce my friend. His name is Rizky Pratama. He is fifteen years old. He studies at SMPN 2 Bandar Lampung. He lives in Rajabasa with his parents. His hobby is playing football.\n\nWhere does Rizky study?", opts:["At SMA Darul Fattah","At SMPN 2 Bandar Lampung","At a football school","At Rajabasa Elementary School","At a boarding school in another city"], answer:1},
+    {q:"Read the text and answer the question!", passage:"Dedi never helps his friends. When his classmate asked for help with homework, he laughed and walked away. He also never shares his food with others.\n\nWhat is Dedi like?", opts:["Kind and helpful","Generous and friendly","Selfish and unfriendly","Diligent and smart","Polite and humble"], answer:2},
+    {q:"Read the text and answer the question!", passage:"Sari always greets her teachers politely. She helps her mother at home every day and takes care of her younger sister patiently.\n\nWhat is Sari like?", opts:["Lazy and rude","Kind and responsible","Arrogant and selfish","Shy and quiet only","Careless and noisy"], answer:1},
+    {q:"Complete the dialogue with the expression for checking understanding!\nTeacher: \"We use 'was' for singular subjects in the past. …?\"\nStudents: \"Yes, Ma'am.\"", opts:["Do you understand","What do you think","How are you","Where do you live","Can you swim"], answer:0},
+    {q:"Complete the dialogue!\nTeacher: \"Pay attention, please. Is it clear?\"\nStudent: \"…\" (the student does NOT understand)", opts:["Yes, it's very clear, Sir.","Sorry, Sir. Could you repeat it, please?","Thank you very much, Sir.","See you tomorrow, Sir.","Good morning, Sir."], answer:1},
+    {q:"Read the recount text and answer the question!", passage:"Last holiday, I went to the beach with my family. We left home at six in the morning. At the beach, I swam and built a sandcastle with my brother. In the afternoon, we ate grilled fish at a small restaurant before going home.\n\nWhat did the writer do at the beach?", opts:["Flew a kite and rode a horse","Swam and built a sandcastle","Went fishing and sailed a boat","Played volleyball and surfed","Camped and made a bonfire"], answer:1},
+    {q:"Read the recount text and answer the question!", passage:"Last holiday, I went to the beach with my family. We left home at six in the morning. At the beach, I swam and built a sandcastle with my brother. In the afternoon, we ate grilled fish at a small restaurant before going home.\n\nWhat can we infer from the text?", opts:["The writer went to the beach alone","The writer had an enjoyable holiday with his/her family","The writer disliked the beach very much","The writer stayed at the beach for a week","The writer went to the beach at night"], answer:1},
+    {q:"Read the recount text and answer the question!", passage:"Yesterday was a tiring day for me. I woke up late, so I missed the bus. I ran to school, but the gate was already closed. Finally, my teacher allowed me to join the class after I explained what happened.\n\nWhy did the writer miss the bus?", opts:["Because the bus was broken","Because he/she woke up late","Because the road was closed","Because he/she forgot the schedule","Because he/she went to school on foot"], answer:1},
+    {q:"What does this notice mean?\n\"NO SMOKING IN THIS AREA\"", opts:["You may smoke here freely","Smoking is allowed in this area","You are not allowed to smoke in this area","Please smoke in this area","Smoking is good for health here"], answer:2},
+    {q:"What does this sign mean?\n\"KEEP OFF THE GRASS\"", opts:["Please sit on the grass","Do not walk on the grass","Water the grass every day","The grass is for sale","Cut the grass regularly"], answer:1},
+    {q:"Complete the sentence with the correct tense!\n\"She … her homework last night.\"", opts:["does","do","did","doing","will do tomorrow"], answer:2},
+    {q:"Complete the sentence with the correct tense!\n\"They … football in the field right now.\"", opts:["plays","played","are playing","play yesterday","will played"], answer:2},
+    {q:"Complete the sentence with the correct tense!\n\"My father … to work by motorcycle every morning.\"", opts:["go","goes","went yesterday","going","gone"], answer:1}
+  ]},
+  ipa: { name:"Ilmu Pengetahuan Alam (IPA)", icon:"🔬", desc:"Usaha, energi, tekanan hidrostatis, sistem tubuh, ekosistem, asam-basa & pemisahan campuran", show:12, questions:[
+    {q:"Sebuah benda didorong dengan gaya 60 N sehingga berpindah sejauh 5 m. Gaya gesek yang melawan gerak benda sebesar 20 N. Usaha bersih yang dilakukan pada benda adalah …", opts:["100 J","200 J","300 J","400 J","80 J"], answer:1},
+    {q:"Sebuah balok ditarik dengan gaya 80 N sejauh 4 m. Jika gaya geseknya 30 N, usaha bersihnya adalah …", opts:["120 J","200 J","320 J","440 J","50 J"], answer:1},
+    {q:"Sebuah benda bermassa 2 kg jatuh dari ketinggian 10 m (g = 10 m/s²). Energi kinetik benda tepat saat menyentuh tanah (berdasarkan hukum kekekalan energi mekanik) adalah …", opts:["20 J","100 J","200 J","400 J","1.000 J"], answer:2},
+    {q:"Benda bermassa 1 kg berada pada ketinggian 5 m (g = 10 m/s²). Saat jatuh hingga ketinggian 2 m, energi kinetik benda adalah …", opts:["20 J","30 J","50 J","70 J","100 J"], answer:1},
+    {q:"Sebuah lampu berdaya 60 watt menyala selama 5 jam. Energi listrik yang digunakan lampu tersebut adalah …", opts:["300 Wh = 0,3 kWh","60 Wh = 0,06 kWh","12 Wh","600 Wh = 0,6 kWh","3.000 Wh = 3 kWh"], answer:0},
+    {q:"Setrika listrik berdaya 300 W digunakan selama 2 jam. Energi listrik yang dipakai adalah …", opts:["150 Wh","300 Wh","600 Wh = 0,6 kWh","900 Wh","3.600 Wh"], answer:2},
+    {q:"Tekanan hidrostatis pada kedalaman 2 m di dalam air (massa jenis air 1.000 kg/m³, g = 10 m/s²) adalah …", opts:["2.000 Pa","10.000 Pa","20.000 Pa","200.000 Pa","500 Pa"], answer:2},
+    {q:"Seekor ikan berada pada kedalaman 3 m di bawah permukaan air (ρ = 1.000 kg/m³, g = 10 m/s²). Tekanan hidrostatis yang dialami ikan adalah …", opts:["3.000 Pa","10.000 Pa","30.000 Pa","300.000 Pa","13.000 Pa"], answer:2},
+    {q:"Organ sistem pernapasan yang berperan utama memasok oksigen ke dalam darah melalui proses difusi adalah …", opts:["Trakea","Bronkus","Alveolus","Laring","Diafragma"], answer:2},
+    {q:"Perhatikan rantai makanan berikut: Padi → Tikus → Ular → Elang.\nJika populasi ular menurun drastis karena diburu manusia, organisme yang PERTAMA KALI terdampak langsung (populasinya meningkat) adalah …", opts:["Padi","Tikus","Elang","Petani","Belalang"], answer:1},
+    {q:"Dalam rantai makanan: Rumput → Belalang → Katak → Ular. Jika populasi katak menurun, dampak pertama yang terjadi adalah …", opts:["Populasi belalang meningkat","Populasi rumput meningkat","Populasi ular meningkat","Populasi belalang punah","Tidak ada perubahan sama sekali"], answer:0},
+    {q:"Enzim amilase berfungsi untuk …", opts:["Mengubah protein menjadi asam amino di lambung","Mengubah zat tepung (amilum) menjadi gula, bekerja di mulut dan usus halus","Mengemulsi lemak menjadi butiran kecil","Mengubah lemak menjadi asam lemak di lambung","Mengaktifkan enzim pepsin"], answer:1},
+    {q:"Enzim pepsin dan lipase berturut-turut berfungsi untuk …", opts:["Pepsin mencerna amilum; lipase mencerna protein","Pepsin mencerna protein di lambung; lipase mencerna lemak di usus halus","Pepsin mencerna lemak; lipase mencerna amilum","Keduanya mencerna gula di mulut","Keduanya dihasilkan oleh hati untuk mencerna karbohidrat"], answer:1},
+    {q:"Mikroorganisme yang berperan dalam pembuatan tempe dan yogurt berturut-turut adalah …", opts:["Rhizopus oryzae dan Lactobacillus bulgaricus","Saccharomyces cerevisiae dan Aspergillus oryzae","Acetobacter xylinum dan Rhizopus oryzae","Lactobacillus dan Saccharomyces saja untuk keduanya","Penicillium dan Acetobacter xylinum"], answer:0},
+    {q:"Pembuatan tape singkong memanfaatkan mikroorganisme … yang mengubah tepung menjadi gula dan alkohol melalui fermentasi.", opts:["Lactobacillus bulgaricus","Saccharomyces cerevisiae","Rhizopus oligosporus saja tanpa ragi","Acetobacter xylinum","Escherichia coli"], answer:1},
+    {q:"Peristiwa menguapnya air laut menjadi uap air karena panas matahari, dan mencairnya es menjadi air, berturut-turut disebut …", opts:["Sublimasi dan kondensasi","Evaporasi (penguapan) dan peleburan (pencairan)","Kondensasi dan deposisi","Peleburan dan pembekuan","Kristalisasi dan evaporasi"], answer:1},
+    {q:"Kapur barus yang diletakkan di lemari lama-kelamaan habis karena berubah langsung dari padat menjadi gas. Perubahan wujud ini disebut …", opts:["Mencair","Menguap","Menyublim (sublimasi)","Mengembun","Membeku"], answer:2},
+    {q:"Suatu larutan diuji dengan kertas lakmus. Lakmus biru berubah menjadi merah, sedangkan lakmus merah tetap merah. Sifat larutan tersebut adalah …", opts:["Basa","Asam","Netral","Garam","Tidak dapat ditentukan"], answer:1},
+    {q:"Larutan yang dapat membirukan lakmus merah dan mempertahankan warna lakmus biru bersifat …", opts:["Asam","Basa","Netral","Asam kuat","Campuran asam dan garam"], answer:1},
+    {q:"Metode pemisahan yang paling tepat untuk memisahkan air dan pasir, serta campuran air dan alkohol (berdasarkan perbedaan titik didih), berturut-turut adalah …", opts:["Sublimasi dan filtrasi","Filtrasi (penyaringan) dan distilasi (penyulingan)","Evaporasi dan sublimasi","Sentrifugasi dan kromatografi","Dekantasi dan magnetisasi saja"], answer:1}
+  ]},
+  ips: { name:"Ilmu Pengetahuan Sosial (IPS)", icon:"🌏", desc:"Letak Indonesia, kolonialisme, flora-fauna, kegiatan ekonomi, interaksi & lembaga sosial", show:12, questions:[
+    {q:"Dampak positif letak geografis Indonesia yang berada di antara dua benua dan dua samudra adalah …", opts:["Indonesia terisolasi dari dunia luar","Indonesia menjadi jalur perdagangan internasional yang strategis","Indonesia hanya memiliki satu musim","Indonesia bebas dari bencana alam","Perdagangan Indonesia menjadi terhambat"], answer:1},
+    {q:"Letak Indonesia secara astronomis adalah 6° LU – 11° LS dan 95° BT – 141° BT. Dampaknya adalah …", opts:["Indonesia beriklim subtropis dengan empat musim","Indonesia beriklim tropis dan terbagi menjadi tiga daerah waktu","Indonesia memiliki iklim dingin sepanjang tahun","Indonesia hanya mengalami musim kemarau","Indonesia tidak dilalui garis khatulistiwa"], answer:1},
+    {q:"Letak geologis Indonesia yang berada pada pertemuan lempeng tektonik menyebabkan …", opts:["Indonesia tidak memiliki gunung berapi","Indonesia memiliki banyak gunung berapi aktif dan rawan gempa","Tanah Indonesia selalu tandus","Indonesia bebas gempa bumi","Indonesia tidak memiliki sumber daya mineral"], answer:1},
+    {q:"Contoh kegiatan ekonomi di bidang distribusi adalah …", opts:["Petani menanam padi di sawah","Pedagang besar mengangkut dan menjual hasil panen ke berbagai daerah","Keluarga memasak dan mengonsumsi nasi di rumah","Nelayan menangkap ikan di laut","Penjahit membuat pakaian dari kain"], answer:1},
+    {q:"Masyarakat pesisir sebagian besar bekerja sebagai nelayan, sedangkan masyarakat pegunungan bekerja sebagai petani sayur. Hal ini menunjukkan kegiatan ekonomi masyarakat dipengaruhi oleh …", opts:["Tingkat pendidikan saja","Kondisi alam dan letak geografis tempat tinggalnya","Jumlah anggota keluarga","Kebijakan pemerintah pusat saja","Adat istiadat yang melarang pekerjaan lain"], answer:1},
+    {q:"Contoh interaksi sosial asosiatif adalah …", opts:["Tawuran antarpelajar","Persaingan tidak sehat antar pedagang","Kerja sama warga dalam gotong royong membersihkan lingkungan","Pertentangan antar kelompok masyarakat","Konflik karena perbedaan pendapat yang berujung kekerasan"], answer:2},
+    {q:"Proses interaksi sosial yang mengarah pada perpecahan disebut interaksi …", opts:["Asosiatif","Disosiatif","Kooperatif","Akomodatif","Asimilatif"], answer:1},
+    {q:"Kehidupan masyarakat pada masa Pra Aksara ditandai dengan …", opts:["Sudah mengenal tulisan dan sistem pemerintahan kerajaan","Belum mengenal tulisan, hidup berburu dan meramu (food gathering) pada masa awal","Sudah menggunakan uang dan perdagangan internasional","Sudah membangun candi dan istana megah","Sudah mengenal teknologi mesin"], answer:1},
+    {q:"Manusia purba pada masa berburu dan meramu hidup secara nomaden (berpindah-pindah) karena …", opts:["Menghindari pajak dari kerajaan","Bergantung pada ketersediaan makanan di alam; jika habis, mereka pindah","Ingin berdagang ke daerah lain","Mencari tempat ibadah yang lebih baik","Mengikuti perintah kepala suku untuk berperang"], answer:1},
+    {q:"Latar belakang kedatangan bangsa Eropa ke Indonesia dikenal dengan semboyan 3G, yaitu …", opts:["Gold, Glory, dan Gospel (kekayaan, kejayaan, penyebaran agama)","Gold, Goods, dan Government","Glory, Garden, dan Gospel","Gold, Glory, dan Garden","Goods, Glory, dan Government"], answer:0},
+    {q:"Tujuan utama VOC didirikan oleh Belanda di Indonesia pada tahun 1602 adalah …", opts:["Menyebarkan pendidikan bagi rakyat Indonesia","Memonopoli perdagangan rempah-rempah di Indonesia","Membangun infrastruktur Indonesia","Membebaskan Indonesia dari penjajahan","Mengembangkan pertanian rakyat secara bebas"], answer:1},
+    {q:"Kebijakan tanam paksa (cultuurstelsel) pada masa kolonial Belanda berdampak bagi rakyat Indonesia berupa …", opts:["Rakyat menjadi sejahtera dan kaya","Rakyat menderita karena wajib menanam tanaman ekspor dan menyerahkan hasilnya kepada Belanda","Rakyat bebas menanam apa saja","Rakyat mendapatkan pendidikan tinggi gratis","Lahan rakyat bertambah luas"], answer:1},
+    {q:"Interaksi antarruang dapat terjadi karena adanya …", opts:["Kesamaan semua kebutuhan di setiap daerah","Perbedaan potensi dan kebutuhan antar daerah sehingga saling melengkapi (complementarity)","Larangan perpindahan penduduk","Keseragaman sumber daya alam di semua wilayah","Tidak adanya sarana transportasi"], answer:1},
+    {q:"Fauna tipe Asiatis dan Australis dipisahkan oleh garis … , sedangkan fauna peralihan terdapat di wilayah …", opts:["Wallace memisahkan Asiatis-Australis; peralihan di Papua","Weber adalah garis khayal tanpa fauna; peralihan di Jawa","Garis Wallace membatasi Asiatis dan peralihan; fauna peralihan contohnya komodo dan anoa di Sulawesi/Nusa Tenggara","Garis khatulistiwa; peralihan di Sumatra","Garis Weber membatasi Eropa dan Asia; peralihan di Kalimantan"], answer:2},
+    {q:"Contoh fauna tipe Australis adalah …", opts:["Gajah dan harimau Sumatra","Kanguru dan burung cenderawasih","Komodo dan anoa","Badak bercula satu dan orang utan","Banteng dan merak"], answer:1},
+    {q:"Peninggalan kerajaan Hindu-Buddha di Indonesia yang berupa candi Buddha terbesar dan candi Hindu di Jawa Tengah berturut-turut adalah …", opts:["Candi Prambanan dan Candi Borobudur (keduanya sama)","Candi Borobudur (Buddha) dan Candi Prambanan (Hindu)","Candi Penataran dan Candi Singasari","Candi Muara Takus dan Candi Dieng saja","Pura Besakih dan Candi Borobudur"], answer:1},
+    {q:"Uang kartal adalah … , sedangkan uang giral adalah …", opts:["Kartu kredit dan uang kertas","Uang kertas dan logam yang beredar di masyarakat; alat pembayaran berupa cek, giro, dan sejenisnya yang diterbitkan bank","Uang elektronik dan uang mainan","Uang asing dan uang lokal","Tabungan dan deposito saja"], answer:1},
+    {q:"Lembaga sosial yang berfungsi utama dalam membentuk kepribadian anak dan pertama kali mengenalkan nilai dan norma adalah lembaga …", opts:["Ekonomi","Pendidikan formal di universitas","Keluarga","Politik","Agama di tingkat negara"], answer:2},
+    {q:"Seorang anak petani yang berkat pendidikan tinggi menjadi dokter merupakan contoh mobilitas sosial …", opts:["Horizontal","Vertikal turun","Vertikal naik (social climbing)","Antar generasi yang menurun","Geografis"], answer:2},
+    {q:"Perdagangan internasional memberikan manfaat bagi suatu negara, antara lain …", opts:["Membuat negara terisolasi","Memperoleh barang yang tidak dapat diproduksi di dalam negeri dan memperluas pasar produk dalam negeri (ekspor)","Menghambat pertumbuhan ekonomi","Mengurangi devisa negara selalu","Melarang masuknya teknologi baru"], answer:1},
+    {q:"Perbedaan utama masa Orde Baru dengan masa Reformasi dalam kehidupan politik Indonesia adalah …", opts:["Orde Baru dan Reformasi sama-sama tanpa pemilu","Reformasi ditandai kebebasan pers, pemilu yang lebih demokratis, dan otonomi daerah setelah kepemimpinan terpusat pada masa Orde Baru","Orde Baru mengutamakan kebebasan pers tanpa batas","Reformasi menghapuskan pemilu","Orde Lama, Orde Baru, dan Reformasi tidak memiliki perbedaan"], answer:1}
+  ]},
+  mtk: { name:"Matematika", icon:"➗", desc:"KPK, barisan bilangan, gradien, rata-rata gabungan, peluang, fungsi linear & Pythagoras", show:7, questions:[
+    {q:"KPK dari 12 dan 18 adalah …", opts:["6","24","36","54","72"], answer:2},
+    {q:"KPK dari 8 dan 20 adalah …", opts:["20","40","80","160","4"], answer:1},
+    {q:"KPK dari 15 dan 25 adalah …", opts:["25","50","75","125","5"], answer:2},
+    {q:"Diketahui barisan bilangan segitiga: 1, 3, 6, 10, 15, … Dua suku berikutnya adalah …", opts:["20 dan 26","21 dan 28","22 dan 30","21 dan 27","20 dan 25"], answer:1},
+    {q:"Diketahui barisan tingkat dua: 2, 5, 10, 17, 26, … Dua suku berikutnya adalah …", opts:["35 dan 46","37 dan 50","36 dan 49","37 dan 48","38 dan 52"], answer:1},
+    {q:"Gradien garis yang sejajar dengan garis 2x + 4y = 8 adalah …", opts:["2","1/2","−1/2","−2","4"], answer:2},
+    {q:"Gradien garis yang sejajar dengan garis 3x − 6y = 12 adalah …", opts:["3","−3","1/2","−1/2","6"], answer:2},
+    {q:"Rata-rata nilai 20 siswa adalah 70. Setelah digabung dengan 10 siswa lain, rata-rata gabungannya menjadi 72. Rata-rata nilai 10 siswa tersebut adalah …", opts:["70","72","74","76","78"], answer:3},
+    {q:"Kelompok pertama terdiri atas 10 orang dengan rata-rata berat 60 kg. Rata-rata gabungan 25 orang adalah 64 kg. Rata-rata berat kelompok kedua (15 orang) adalah …", opts:["64 kg","65 kg","66,67 kg","68 kg","70 kg"], answer:2},
+    {q:"Dalam sebuah kantong terdapat 4 kelereng merah, 6 kelereng biru, dan 5 kelereng hijau. Peluang terambilnya satu kelereng biru adalah …", opts:["4/15","1/5","2/5","3/5","1/3"], answer:2},
+    {q:"Sebuah kantong berisi 3 bola merah dan 7 bola putih. Peluang terambil bola merah adalah …", opts:["7/10","3/7","3/10","1/3","10/3"], answer:2},
+    {q:"Diketahui fungsi f(x) = ax + b. Jika f(1) = 5 dan f(3) = 11, maka nilai f(5) adalah …", opts:["14","15","16","17","19"], answer:3},
+    {q:"Diketahui f(x) = ax + b, dengan f(0) = 3 dan f(2) = 9. Nilai f(4) adalah …", opts:["12","13","15","18","21"], answer:2},
+    {q:"Sebuah kapal berlayar ke utara sejauh 6 km, kemudian berbelok ke timur sejauh 8 km. Jarak terdekat kapal dari posisi awal adalah …", opts:["10 km","12 km","14 km","48 km","7 km"], answer:0},
+    {q:"Sebuah kapal berlayar ke timur sejauh 9 km, lalu ke utara sejauh 12 km. Jarak terdekat dari titik awal adalah …", opts:["15 km","18 km","21 km","20 km","108 km"], answer:0}
+  ]},
+  pai: { name:"Pendidikan Agama Islam", icon:"🕌", desc:"Pengertian iman & niat, taharah, makanan halal-tayyib & mengenal Rasulullah SAW", show:5, questions:[
+    {q:"Menurut hadis riwayat Bukhari dan Muslim, iman memiliki cabang yang jumlahnya …", opts:["40 cabang","50 cabang","Lebih dari 70 cabang (77 cabang)","99 cabang","25 cabang"], answer:2},
+    {q:"Definisi niat yang tepat adalah …", opts:["Ucapan lisan yang selalu harus dilafalkan dengan keras","Keinginan / maksud dalam hati untuk melakukan suatu ibadah karena Allah Swt.","Gerakan awal dalam salat","Doa yang dibaca setelah beribadah","Syarat sah puasa saja tanpa kaitan dengan ibadah lain"], answer:1},
+    {q:"Berikut yang termasuk taharah dari hadas besar adalah …", opts:["Berwudu saja sudah cukup untuk hadas besar","Mandi wajib (mandi junub) dengan niat dan meratakan air ke seluruh tubuh","Cukup membasuh muka dan tangan","Istinja dengan air","Tayamum hanya boleh untuk hadas kecil"], answer:1},
+    {q:"Najis mughallazhah (najis berat), contohnya air liur anjing, cara menyucikannya adalah …", opts:["Cukup dibasuh satu kali dengan air","Dibasuh tujuh kali, salah satunya dengan tanah/debu yang suci","Cukup dilap dengan tisu kering","Dibasuh tiga kali dengan sabun saja","Dibiarkan kering lalu disapu"], answer:1},
+    {q:"Berikut yang termasuk macam-macam taharah adalah …", opts:["Hanya berwudu sepanjang hidup","Bersuci dari hadas (dengan wudu, mandi wajib, atau tayamum) dan bersuci dari najis (membersihkan badan, pakaian, dan tempat)","Zakat dan puasa","Salat dan membaca Al-Qur'an","Sedekah dan haji"], answer:1},
+    {q:"Makanan yang halal dan tayyib adalah makanan yang …", opts:["Mahal dan berasal dari luar negeri","Dibenarkan oleh syariat Islam dan baik, bersih, serta tidak membahayakan kesehatan","Disukai banyak orang tanpa memperhatikan syariat","Banyak mengandung lemak dan gula","Dijual di restoran terkenal"], answer:1},
+    {q:"Berikut yang termasuk makanan yang HARAM dikonsumsi menurut syariat Islam adalah …", opts:["Daging sapi yang disembelih dengan menyebut nama Allah","Ikan laut segar","Bangkai, darah, daging babi, dan hewan yang disembelih tanpa menyebut nama Allah","Sayuran dan buah-buahan segar","Daging ayam yang disembelih secara syar'i"], answer:2},
+    {q:"Ayah dan ibu Rasulullah SAW bernama …", opts:["Abu Thalib dan Halimah","Abdullah dan Aminah","Abdul Muthalib dan Fatimah binti Asad","Abu Bakar dan Khadijah","Hamzah dan Aminah"], answer:1},
+    {q:"Kakek Rasulullah SAW yang mengasuh beliau setelah ibunya wafat, dan paman yang mengasuh beliau setelah kakeknya wafat, berturut-turut adalah …", opts:["Abu Thalib dan Abdul Muthalib","Abdul Muthalib dan Abu Thalib","Abu Lahab dan Hamzah","Abbas dan Abu Thalib","Abdul Muthalib dan Abu Lahab"], answer:1},
+    {q:"Perjalanan dakwah Rasulullah SAW yang tepat adalah …", opts:["Dakwah dimulai di Madinah lalu pindah ke Mekah","Dakwah secara sembunyi-sembunyi lalu terang-terangan di Mekah, kemudian hijrah dan berdakwah di Madinah","Dakwah hanya dilakukan di Madinah selama 23 tahun","Rasulullah tidak pernah berhijrah","Dakwah pertama kali dilakukan di Thaif dan menetap di sana"], answer:1}
+  ]},
+  tpa: { name:"Tes Potensi Akademik (TPA)", icon:"🧠", desc:"Sinonim, antonim, analogi, klasifikasi, silogisme & deret angka", show:7, questions:[
+    {q:"Sinonim (persamaan makna) kata \"bahagia\" adalah …", opts:["Sedih","Gembira","Marah","Kecewa","Gelisah"], answer:1},
+    {q:"Sinonim kata \"cemerlang\" adalah …", opts:["Redup","Suram","Gemilang","Biasa saja","Kusam"], answer:2},
+    {q:"Antonim (lawan kata) dari \"rajin\" adalah …", opts:["Giat","Tekun","Malas","Aktif","Semangat"], answer:2},
+    {q:"Antonim kata \"tinggi\" adalah …", opts:["Besar","Rendah","Panjang","Luas","Jauh"], answer:1},
+    {q:"Analogi: Buku : Membaca = Pensil : …", opts:["Menghapus","Menulis","Membeli","Menyimpan","Menggambar saja tanpa menulis"], answer:1},
+    {q:"Analogi: Dokter : Pasien = Guru : …", opts:["Sekolah","Murid","Buku","Kelas","Pelajaran saja"], answer:1},
+    {q:"Klasifikasi: Manakah kata yang TIDAK termasuk dalam kelompoknya?\nApel, Mangga, Jeruk, Wortel, Anggur", opts:["Apel","Mangga","Jeruk","Wortel","Anggur"], answer:3},
+    {q:"Klasifikasi: Manakah yang TIDAK termasuk kelompoknya?\nSegitiga, Persegi, Lingkaran, Balok, Persegi Panjang\n(Catatan: yang lain adalah bangun datar, satu di antaranya bangun ruang)", opts:["Segitiga","Persegi","Lingkaran","Balok","Persegi Panjang"], answer:3},
+    {q:"Penalaran logis (silogisme):\nPremis 1: Semua siswa yang lulus ujian mendapatkan sertifikat.\nPremis 2: Budi adalah siswa yang lulus ujian.\nKesimpulan yang tepat adalah …", opts:["Budi mungkin mendapatkan sertifikat","Budi mendapatkan sertifikat","Budi tidak mendapatkan sertifikat","Semua yang mendapat sertifikat pasti bernama Budi","Tidak dapat disimpulkan apa pun"], answer:1},
+    {q:"Deret angka: 3, 6, 12, 24, … Angka berikutnya adalah …", opts:["30","36","48","28","26"], answer:2},
+    {q:"Deret angka: 2, 5, 9, 14, 20, … Angka berikutnya adalah …", opts:["25","26","27","28","30"], answer:2},
+    {q:"Penalaran logis dengan pengingkaran:\nPremis 1: Jika siswa belajar dengan giat, maka ia akan memahami pelajaran.\nPremis 2: Sinta TIDAK memahami pelajaran.\nKesimpulan yang tepat (modus tollens) adalah …", opts:["Sinta belajar dengan giat","Sinta tidak belajar dengan giat","Sinta pasti memahami pelajaran di waktu lain","Semua siswa memahami pelajaran","Tidak ada kesimpulan yang dapat ditarik sama sekali dalam logika"], answer:1},
+    {q:"Penalaran logis dengan pengingkaran:\nPremis: Semua peserta yang membawa kartu ujian boleh masuk ruangan. Rina tidak boleh masuk ruangan.\nKesimpulan yang tepat adalah …", opts:["Rina membawa kartu ujian","Rina tidak membawa kartu ujian","Rina adalah pengawas ujian","Semua peserta boleh masuk","Rina masuk ruangan melalui pintu lain"], answer:1}
+  ]}
+};
+var ORDER = ["indo","inggris","ipa","ips","mtk","pai","tpa"];
+
+// ============ STATE ============
+var state = { name:"", school:"", results:{}, drafts:{}, current:null, examQuestions:[], examAnswers:[], examIndex:0 };
+
+function $(id){return document.getElementById(id)}
+function shuffle(arr){ var a=arr.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t;} return a; }
+function prepareExam(subjectId){
+  var subj = BANK[subjectId];
+  var picked = shuffle(subj.questions).slice(0, subj.show);
+  return picked.map(function(q){
+    var idx = q.opts.map(function(_,i){return i});
+    var sidx = shuffle(idx);
+    var newOpts = sidx.map(function(i){return q.opts[i]});
+    var newAns = sidx.indexOf(q.answer);
+    return { q:q.q, passage:q.passage||null, opts:newOpts, answer:newAns };
+  });
+}
+function showScreen(id){
+  ["screenIdentity","screenMenu","screenExam","screenReview"].forEach(function(s){ $(s).classList.add("hidden"); });
+  $(id).classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+$("formIdentity").addEventListener("submit", function(e){
+  e.preventDefault();
+  var n = $("inpName").value.trim(); var s = $("inpSchool").value.trim();
+  if(!n || !s) return;
+  state.name=n; state.school=s;
+  $("greetName").textContent=n;
+  $("greetSchool").textContent="Asal sekolah: "+s;
+  renderMenu(); showScreen("screenMenu");
+});
+
+function renderMenu(){
+  var grid=$("subjectGrid"); grid.innerHTML="";
+  var doneCount=0;
+  ORDER.forEach(function(id){
+    var subj=BANK[id]; var res=state.results[id];
+    if(res) doneCount++;
+    var btn=document.createElement("button");
+    btn.className="subject"+(res?" done":"");
+    btn.innerHTML='<span class="ic">'+subj.icon+'</span><span style="flex:1"><strong>'+subj.name+'</strong><small>'+subj.desc+'</small><small style="margin-top:5px;font-weight:700">'+subj.show+' soal • 5 pilihan (A–E) • Skor maksimal 100</small></span><span class="badge '+(res?"done":"")+'">'+(res?("✓ Nilai "+res.score):"Mulai →")+'</span>';
+    if(!res){ btn.addEventListener("click", function(){ startExam(id); }); }
+    else { btn.addEventListener("click", function(){ showReview(id); }); btn.title="Lihat hasil"; }
+    grid.appendChild(btn);
+  });
+  $("progressLabel").textContent=doneCount+" dari "+ORDER.length+" mapel selesai";
+  $("progressPct").textContent=Math.round(doneCount/ORDER.length*100)+"%";
+  $("progressBar").style.width=(doneCount/ORDER.length*100)+"%";
+  if(doneCount===ORDER.length){ renderFinal(); $("finalCard").classList.remove("hidden"); } else { $("finalCard").classList.add("hidden"); }
+}
+
+function renderFinal(){
+  var tbody=$("finalTable"); tbody.innerHTML=""; var totalScore=0,totalCorrect=0,totalQ=0;
+  ORDER.forEach(function(id){
+    var r=state.results[id]; totalScore+=r.score; totalCorrect+=r.correct; totalQ+=r.total;
+    var tr=document.createElement("tr");
+    tr.innerHTML="<td><strong>"+BANK[id].name+"</strong></td><td class='num'>"+r.correct+"</td><td class='num'>"+(r.total-r.correct)+"</td><td class='num'><strong>"+r.score+"</strong></td>";
+    tbody.appendChild(tr);
+  });
+  var avg=Math.round(totalScore/ORDER.length);
+  $("avgScore").textContent=avg;
+  $("totalCorrectLabel").innerHTML="Total benar: <strong>"+totalCorrect+"</strong> dari "+totalQ+" soal<br>dari 7 mata pelajaran";
+  state.avg=avg; state.totalCorrect=totalCorrect; state.totalQ=totalQ;
+}
+
+function startExam(id){
+  state.current=id;
+  if(state.drafts[id]){
+    state.examQuestions=state.drafts[id].questions; state.examAnswers=state.drafts[id].answers.slice();
+  } else {
+    state.examQuestions=prepareExam(id);
+    state.examAnswers=state.examQuestions.map(function(){return null});
+  }
+  state.examIndex=0;
+  $("examSubjectLabel").textContent="Mata Pelajaran";
+  $("examTitle").textContent=BANK[id].icon+" "+BANK[id].name;
+  showScreen("screenExam"); renderQuestion();
+}
+function renderQuestion(){
+  var total=state.examQuestions.length; var i=state.examIndex; var q=state.examQuestions[i];
+  $("examCounter").textContent="Soal "+(i+1)+" dari "+total;
+  $("examProgress").style.width=((state.examAnswers.filter(function(a){return a!==null}).length)/total*100)+"%";
+  $("qMeta").textContent="Soal "+(i+1)+" • "+BANK[state.current].name;
+  $("qText").textContent=q.q;
+  if(q.passage){ $("qPassage").textContent=q.passage; $("qPassage").classList.remove("hidden"); } else { $("qPassage").classList.add("hidden"); }
+  var opts=$("qOpts"); opts.innerHTML="";
+  var letters=["A","B","C","D","E"];
+  q.opts.forEach(function(opt,oi){
+    var d=document.createElement("div"); d.className="opt"+(state.examAnswers[i]===oi?" sel":"");
+    d.innerHTML='<span class="letter">'+letters[oi]+'</span><span>'+opt+'</span>';
+    d.addEventListener("click", function(){ state.examAnswers[i]=oi; renderQuestion(); });
+    opts.appendChild(d);
+  });
+  var nums=$("examNums"); nums.innerHTML="";
+  state.examQuestions.forEach(function(_,ni){
+    var b=document.createElement("button"); b.textContent=ni+1;
+    if(state.examAnswers[ni]!==null) b.className="answered";
+    if(ni===i) b.className=(b.className+" current").trim();
+    b.addEventListener("click", function(){ state.examIndex=ni; renderQuestion(); });
+    nums.appendChild(b);
+  });
+  $("btnPrev").disabled=(i===0); $("btnPrev").style.opacity=(i===0?".45":"1");
+  $("btnNext").disabled=(i===total-1); $("btnNext").style.opacity=(i===total-1?".45":"1");
+  var answered=state.examAnswers.filter(function(a){return a!==null}).length;
+  var allAnswered=answered===total;
+  $("btnSubmitExam").disabled=!allAnswered;
+  $("submitHint").textContent=allAnswered?"Semua soal sudah dijawab. Silakan kumpulkan jawabanmu.":"Baru "+answered+" dari "+total+" soal yang dijawab. Jawab semua soal dulu agar tombol Kumpulkan Jawaban aktif.";
+}
+$("btnPrev").addEventListener("click", function(){ if(state.examIndex>0){state.examIndex--; renderQuestion();} });
+$("btnNext").addEventListener("click", function(){ if(state.examIndex<state.examQuestions.length-1){state.examIndex++; renderQuestion();} });
+$("btnBackMenu").addEventListener("click", function(){
+  state.drafts[state.current]={questions:state.examQuestions, answers:state.examAnswers.slice()};
+  renderMenu(); showScreen("screenMenu");
+});
+$("btnSubmitExam").addEventListener("click", function(){ $("modalConfirm").classList.remove("hidden"); });
+$("btnCancelSubmit").addEventListener("click", function(){ $("modalConfirm").classList.add("hidden"); });
+$("btnConfirmSubmit").addEventListener("click", function(){
+  $("modalConfirm").classList.add("hidden");
+  var qs=state.examQuestions; var correct=0;
+  qs.forEach(function(q,i){ if(state.examAnswers[i]===q.answer) correct++; });
+  var score=Math.round(correct/qs.length*100);
+  state.results[state.current]={ score:score, correct:correct, total:qs.length, questions:qs, answers:state.examAnswers.slice() };
+  delete state.drafts[state.current];
+  showReview(state.current);
+});
+
+function showReview(id){
+  var r=state.results[id]; if(!r) return;
+  $("reviewTitle").textContent=BANK[id].icon+" "+BANK[id].name;
+  $("reviewScore").textContent=r.score;
+  $("reviewSummary").innerHTML="Benar: <strong style='color:var(--ok)'>"+r.correct+" soal</strong> • Salah: <strong style='color:var(--red)'>"+(r.total-r.correct)+" soal</strong><br>dari total "+r.total+" soal";
+  var list=$("reviewList"); list.innerHTML="";
+  var letters=["A","B","C","D","E"];
+  r.questions.forEach(function(q,i){
+    var userAns=r.answers[i]; var isOk=userAns===q.answer;
+    var div=document.createElement("div"); div.className="review-item "+(isOk?"ok":"wrong");
+    var passageHtml=q.passage?'<div class="qpassage">'+escapeHtml(q.passage)+'</div>':"";
+    div.innerHTML='<div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><span class="qmeta">Soal '+(i+1)+'</span><span class="status '+(isOk?"ok":"wrong")+'">'+(isOk?"✓ BENAR":"✗ SALAH")+'</span></div><div class="q" style="margin-top:6px">'+escapeHtml(q.q)+'</div>'+passageHtml+'<div class="ansline">Jawaban kamu: <b>'+letters[userAns]+'. '+escapeHtml(q.opts[userAns])+'</b></div>'+(isOk?"":'<div class="ansline">Kunci jawaban yang benar tidak ditampilkan. Pelajari kembali materinya, ya!</div>');
+    list.appendChild(div);
+  });
+  showScreen("screenReview");
+}
+function escapeHtml(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+$("btnReviewBack").addEventListener("click", function(){ renderMenu(); showScreen("screenMenu"); });
+$("btnRestart").addEventListener("click", function(){ state.results={}; state.drafts={}; renderMenu(); showScreen("screenMenu"); });
+
+$("btnDownload").addEventListener("click", function(){
+  var W=1080, H=1380; var c=document.createElement("canvas"); c.width=W; c.height=H; var x=c.getContext("2d");
+  x.fillStyle="#0a4f3a"; x.fillRect(0,0,W,190);
+  x.fillStyle="#ffffff"; x.font="bold 38px sans-serif"; x.fillText("Tes Akademik CBT",48,72);
+  x.font="bold 30px sans-serif"; x.fillText("SMA Qur'an Darul Fattah — SPMB 2027/2028",48,118);
+  x.font="22px sans-serif"; x.globalAlpha=.9; x.fillText("Hasil Akhir Peserta",48,158); x.globalAlpha=1;
+  x.fillStyle="#ffffff"; x.fillRect(0,190,W,H-190);
+  x.fillStyle="#13201a"; x.font="24px sans-serif";
+  x.fillText("Nama        : "+state.name,48,250);
+  x.fillText("Asal Sekolah: "+state.school,48,292);
+  var tgl=new Date().toLocaleDateString("id-ID",{day:"numeric",month:"long",year:"numeric"});
+  x.fillText("Tanggal     : "+tgl,48,334);
+  var y=410;
+  x.font="bold 24px sans-serif"; x.fillText("Mata Pelajaran",48,y); x.fillText("Nilai",880,y); y+=14;
+  x.strokeStyle="#dbe7df"; x.beginPath(); x.moveTo(48,y); x.lineTo(W-48,y); x.stroke(); y+=42;
+  x.font="24px sans-serif";
+  ORDER.forEach(function(id){ var r=state.results[id]; x.fillStyle="#13201a"; x.fillText(BANK[id].name,48,y); x.fillText(r.correct+"/"+r.total+" benar",560,y); x.font="bold 24px sans-serif"; x.fillText(String(r.score),880,y); x.font="24px sans-serif"; y+=48; });
+  y+=10; x.strokeStyle="#dbe7df"; x.beginPath(); x.moveTo(48,y); x.lineTo(W-48,y); x.stroke(); y+=58;
+  x.font="bold 30px sans-serif"; x.fillText("Rata-rata Nilai: "+(state.avg||0)+"  (skala 100)",48,y); y+=44;
+  x.font="22px sans-serif"; x.fillStyle="#5b6b62"; x.fillText("Total benar: "+(state.totalCorrect||0)+" dari "+(state.totalQ||0)+" soal",48,y);
+  x.font="20px sans-serif"; x.fillText("Kunci jawaban tidak ditampilkan sesuai ketentuan tes.",48,H-56);
+  var a=document.createElement("a"); a.download="hasil-cbt-smaq-"+state.name.replace(/\s+/g,"-").toLowerCase()+".jpg"; a.href=c.toDataURL("image/jpeg",0.92); a.click();
+});
+</script>
+</body>
+</html>
