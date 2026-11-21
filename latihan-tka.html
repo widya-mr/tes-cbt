@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Latihan TKA Zaid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+    <style>
+      :root{
+        --bg:#eef4f1;
+        --surface:#ffffff;
+        --surface-2:#f6f9f7;
+        --ink:#16241f;
+        --ink-soft:#4a5d55;
+        --line:#d7e2dc;
+        --teal:#0e6b5c;
+        --teal-dark:#0a5246;
+        --teal-soft:#e2f0eb;
+        --amber:#e8a020;
+        --amber-soft:#fdf3dd;
+        --stimulus-bg:#fff8e8;
+        --stimulus-line:#ecd9a8;
+        --stimulus-ink:#3d3418;
+        --ok:#177245;
+        --ok-bg:#e3f3e9;
+        --bad:#b3362b;
+        --bad-bg:#fbeae8;
+        --radius:16px;
+        --shadow:0 2px 10px rgba(16,50,40,.07), 0 10px 28px rgba(16,50,40,.06);
+      }
+      @media (prefers-color-scheme: dark){
+        :root{
+          --bg:#101714;
+          --surface:#1a2320;
+          --surface-2:#212c28;
+          --ink:#eef4f1;
+          --ink-soft:#a9bcb3;
+          --line:#33423c;
+          --teal:#3cbfa5;
+          --teal-dark:#7adcc6;
+          --teal-soft:#173b33;
+          --amber:#f0b84a;
+          --amber-soft:#3a2f14;
+          --stimulus-bg:#2b2513;
+          --stimulus-line:#5c4d22;
+          --stimulus-ink:#f2e7c8;
+          --ok:#5fd598;
+          --ok-bg:#173528;
+          --bad:#ff9a8f;
+          --bad-bg:#3d1f1c;
+          --shadow:0 2px 10px rgba(0,0,0,.35);
+        }
+      }
+      *{box-sizing:border-box}
+      html{-webkit-text-size-adjust:100%}
+      body{
+        margin:0;background:var(--bg);color:var(--ink);
+        font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+        font-size:16px;line-height:1.55;
+      }
+      button,input{font:inherit}
+      button{min-height:48px;cursor:pointer}
+      .wrap{max-width:720px;margin:0 auto;padding:20px 16px 56px}
+      .screen{display:none}
+      .screen.active{display:block}
+
+      /* ---------- Start screen ---------- */
+      .hero-badge{
+        display:inline-flex;align-items:center;gap:8px;
+        background:var(--teal-soft);color:var(--teal-dark);
+        font-weight:700;font-size:.82rem;letter-spacing:.02em;
+        padding:7px 14px;border-radius:999px;margin-bottom:16px;
+      }
+      h1{font-size:1.72rem;line-height:1.22;margin:0 0 10px;font-weight:800;letter-spacing:-.01em}
+      .lead{color:var(--ink-soft);margin:0 0 22px;font-size:1rem}
+      .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+      .field{margin-bottom:16px}
+      .field label{display:block;font-weight:700;font-size:.92rem;margin-bottom:7px}
+      .field input{
+        width:100%;min-height:50px;padding:12px 14px;border-radius:12px;
+        border:1.5px solid var(--line);background:var(--surface-2);color:var(--ink);
+        font-size:1rem;outline:none;
+      }
+      .field input:focus{border-color:var(--teal)}
+      .field .err{display:none;color:var(--bad);font-size:.85rem;font-weight:600;margin-top:6px}
+      .field.invalid input{border-color:var(--bad)}
+      .field.invalid .err{display:block}
+      .btn{
+        display:inline-flex;align-items:center;justify-content:center;gap:8px;
+        border:none;border-radius:12px;padding:13px 22px;font-weight:800;font-size:1rem;
+        background:var(--teal);color:#fff;transition:opacity .15s, transform .1s;width:100%;
+      }
+      .btn:active{transform:scale(.985)}
+      .btn:disabled{opacity:.38;cursor:not-allowed}
+      .btn.secondary{background:var(--surface-2);color:var(--ink);border:1.5px solid var(--line)}
+      .btn.amber{background:var(--amber);color:#2b1d02}
+      .info-row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+      .info-chip{
+        flex:1;min-width:140px;background:var(--surface-2);border:1px solid var(--line);
+        border-radius:12px;padding:12px 14px;font-size:.88rem;color:var(--ink-soft);
+      }
+      .info-chip strong{display:block;color:var(--ink);font-size:.95rem}
+
+      /* ---------- Menu / subject cards ---------- */
+      .student-line{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+      .avatar{
+        width:46px;height:46px;border-radius:50%;background:var(--teal);color:#fff;
+        display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.15rem;flex:none;
+      }
+      .student-line .who{flex:1;min-width:160px}
+      .student-line .who strong{display:block;font-size:1.05rem}
+      .student-line .who span{color:var(--ink-soft);font-size:.88rem}
+      .link-btn{background:none;border:none;color:var(--teal);font-weight:700;min-height:44px;padding:8px 10px;text-decoration:underline;text-underline-offset:3px}
+      h2.section-title{font-size:1.3rem;margin:4px 0 6px;font-weight:800}
+      .section-sub{color:var(--ink-soft);margin:0 0 18px;font-size:.95rem}
+      .subject-card{
+        background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+        box-shadow:var(--shadow);padding:20px;margin-bottom:16px;
+      }
+      .subject-head{display:flex;gap:14px;align-items:flex-start}
+      .subject-icon{
+        width:52px;height:52px;border-radius:14px;flex:none;display:flex;align-items:center;justify-content:center;
+      }
+      .subject-icon svg{width:28px;height:28px}
+      .icon-math{background:var(--teal-soft);color:var(--teal-dark)}
+      .icon-indo{background:var(--amber-soft);color:#8a5d05}
+      @media (prefers-color-scheme: dark){ .icon-indo{color:var(--amber)} }
+      .subject-head h3{margin:0 0 3px;font-size:1.12rem;font-weight:800}
+      .subject-head p{margin:0;color:var(--ink-soft);font-size:.9rem}
+      .status-pill{
+        margin-left:auto;flex:none;font-size:.78rem;font-weight:800;padding:5px 11px;border-radius:999px;
+        background:var(--surface-2);border:1px solid var(--line);color:var(--ink-soft);
+      }
+      .status-pill.done{background:var(--ok-bg);color:var(--ok);border-color:transparent}
+      .subject-score{font-size:2rem;font-weight:800;margin:14px 0 2px}
+      .subject-score small{font-size:.95rem;color:var(--ink-soft);font-weight:600}
+      .subject-card .btn{margin-top:14px}
+
+      /* ---------- Quiz ---------- */
+      .quiz-top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+      .back-btn{
+        background:var(--surface);border:1.5px solid var(--line);border-radius:10px;
+        min-width:48px;padding:8px 14px;font-weight:700;color:var(--ink);
+      }
+      .quiz-top h2{font-size:1.2rem;margin:0;font-weight:800;flex:1}
+      .progress-wrap{margin-bottom:16px}
+      .progress-label{font-size:.85rem;font-weight:700;color:var(--ink-soft);margin-bottom:6px}
+      .progress-bar{height:9px;border-radius:99px;background:var(--line);overflow:hidden}
+      .progress-fill{height:100%;background:var(--teal);border-radius:99px;transition:width .25s;width:0%}
+      .stimulus{
+        background:var(--stimulus-bg);border:1.5px solid var(--stimulus-line);border-radius:var(--radius);
+        padding:20px;margin-bottom:20px;color:var(--stimulus-ink);
+      }
+      .stimulus .stim-tag{
+        display:inline-block;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+        background:var(--amber);color:#2b1d02;padding:4px 10px;border-radius:6px;margin-bottom:10px;
+      }
+      .stimulus h3{margin:0 0 10px;font-size:1.15rem;font-weight:800}
+      .stimulus .stim-body{font-family:"Lora",Georgia,serif;font-size:1.02rem;line-height:1.75}
+      .stimulus .stim-body p{margin:0 0 12px}
+      .stimulus .stim-body p:last-child{margin-bottom:0}
+      .question{
+        background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+        box-shadow:var(--shadow);padding:18px;margin-bottom:14px;
+      }
+      .q-num{font-size:.78rem;font-weight:800;color:var(--teal);letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
+      .q-text{font-weight:600;margin:0 0 14px;font-size:1rem}
+      .options{display:flex;flex-direction:column;gap:9px}
+      .opt{
+        display:flex;align-items:center;gap:12px;text-align:left;width:100%;
+        background:var(--surface-2);border:1.5px solid var(--line);border-radius:12px;
+        padding:12px 14px;color:var(--ink);font-weight:500;min-height:52px;
+      }
+      .opt .letter{
+        width:30px;height:30px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
+        background:var(--surface);border:1.5px solid var(--line);font-weight:800;font-size:.88rem;
+      }
+      .opt.selected{border-color:var(--teal);background:var(--teal-soft)}
+      .opt.selected .letter{background:var(--teal);border-color:var(--teal);color:#fff}
+      .opt:disabled{cursor:default}
+      .opt.mark-ok{border-color:var(--ok);background:var(--ok-bg)}
+      .opt.mark-ok .letter{background:var(--ok);border-color:var(--ok);color:#fff}
+      .opt.mark-bad{border-color:var(--bad);background:var(--bad-bg)}
+      .opt.mark-bad .letter{background:var(--bad);border-color:var(--bad);color:#fff}
+      .verdict{display:none;align-items:center;gap:8px;margin-top:12px;font-weight:800;font-size:.92rem}
+      .verdict.show{display:flex}
+      .verdict.ok{color:var(--ok)}
+      .verdict.bad{color:var(--bad)}
+      .verdict .chosen-note{font-weight:600;color:var(--ink-soft);font-size:.86rem}
+      .quiz-actions{margin-top:20px;display:flex;flex-direction:column;gap:10px}
+      .hint{text-align:center;color:var(--ink-soft);font-size:.88rem;margin:0}
+
+      /* ---------- Result / recap ---------- */
+      .score-hero{text-align:center;padding:28px 20px;margin-bottom:16px}
+      .score-hero .big{font-size:3.4rem;font-weight:800;line-height:1;color:var(--teal-dark)}
+      .score-hero .big small{font-size:1.2rem;color:var(--ink-soft);font-weight:700}
+      .score-hero p{margin:8px 0 0;color:var(--ink-soft)}
+      .recap-table{width:100%;border-collapse:collapse;margin-top:6px}
+      .recap-table th,.recap-table td{padding:13px 10px;text-align:left;border-bottom:1px solid var(--line);font-size:.98rem}
+      .recap-table th{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+      .recap-table td.score-cell{font-weight:800;text-align:right;font-size:1.1rem}
+      .recap-table th:last-child{text-align:right}
+      .recap-total{display:flex;justify-content:space-between;align-items:center;padding:16px 4px 4px;font-weight:800;font-size:1.05rem}
+      .recap-total .val{font-size:1.5rem;color:var(--teal-dark)}
+      .btn-row{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+      .footer-note{text-align:center;color:var(--ink-soft);font-size:.83rem;margin-top:26px}
+      @media (min-width:560px){
+        .btn-row{flex-direction:row}
+        .btn-row .btn{flex:1}
+        h1{font-size:2rem}
+      }
+      @media (prefers-reduced-motion: reduce){
+        *{transition:none !important}
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+
+      <!-- ============ LAYAR AWAL ============ -->
+      <section class="screen active" id="screen-start">
+        <span class="hero-badge">Kelas 9 SMP · Persiapan Masuk SMA</span>
+        <h1>Latihan TKA (Tes Kemampuan Akademik)</h1>
+        <p class="lead">Dua mata pelajaran, masing-masing terdiri dari satu stimulus dan lima soal pilihan ganda. Kerjakan dengan tenang — urutan mata pelajaran bebas, boleh Matematika dulu atau Bahasa Indonesia dulu.</p>
+        <form class="card" id="form-start" novalidate>
+          <div class="field" id="field-nama">
+            <label for="input-nama">Nama</label>
+            <input type="text" id="input-nama" placeholder="Tulis namamu" autocomplete="name" />
+            <p class="err">Nama belum diisi.</p>
+          </div>
+          <div class="field" id="field-sekolah">
+            <label for="input-sekolah">Sekolah</label>
+            <input type="text" id="input-sekolah" placeholder="Nama sekolahmu" autocomplete="organization" />
+            <p class="err">Sekolah belum diisi.</p>
+          </div>
+          <button type="submit" class="btn">Mulai Latihan</button>
+          <div class="info-row">
+            <div class="info-chip"><strong>2 mata pelajaran</strong>Matematika &amp; Bahasa Indonesia</div>
+            <div class="info-chip"><strong>10 soal</strong>5 soal per mata pelajaran, tiap soal 20 poin</div>
+          </div>
+        </form>
+      </section>
+
+      <!-- ============ MENU MATA PELAJARAN ============ -->
+      <section class="screen" id="screen-menu">
+        <div class="student-line">
+          <div class="avatar" id="avatar-initial">Z</div>
+          <div class="who">
+            <strong id="menu-nama">—</strong>
+            <span id="menu-sekolah">—</span>
+          </div>
+          <button class="link-btn" id="btn-ganti-identitas" type="button">Ganti nama</button>
+        </div>
+        <h2 class="section-title">Pilih mata pelajaran</h2>
+        <p class="section-sub">Boleh dikerjakan dalam urutan bebas. Nilai muncul setelah kamu mengumpulkan jawaban satu mata pelajaran.</p>
+        <div id="subject-list"></div>
+        <div id="menu-recap-slot"></div>
+      </section>
+
+      <!-- ============ LAYAR SOAL ============ -->
+      <section class="screen" id="screen-quiz">
+        <div class="quiz-top">
+          <button class="back-btn" id="btn-back-menu" type="button">← Kembali</button>
+          <h2 id="quiz-title">Matematika</h2>
+        </div>
+        <div class="progress-wrap" id="progress-wrap">
+          <div class="progress-label" id="progress-label">0 dari 5 soal terjawab</div>
+          <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        </div>
+        <div class="stimulus" id="quiz-stimulus"></div>
+        <div id="quiz-questions"></div>
+        <div class="quiz-actions" id="quiz-actions">
+          <p class="hint" id="submit-hint">Jawab semua soal dulu, baru tombol kumpul aktif.</p>
+          <button class="btn" id="btn-submit" type="button" disabled>Kumpulkan Jawaban</button>
+        </div>
+      </section>
+
+      <!-- ============ HASIL PER MATA PELAJARAN ============ -->
+      <section class="screen" id="screen-result">
+        <div class="card score-hero">
+          <div class="big"><span id="result-score">0</span><small> / 100</small></div>
+          <p id="result-caption">Nilai Matematika</p>
+        </div>
+        <div id="result-questions"></div>
+        <div class="btn-row">
+          <button class="btn secondary" id="btn-result-retry" type="button">Ulangi Mata Pelajaran Ini</button>
+          <button class="btn" id="btn-result-menu" type="button">Kembali ke Menu</button>
+        </div>
+      </section>
+
+      <!-- ============ REKAP AKHIR ============ -->
+      <section class="screen" id="screen-recap">
+        <h2 class="section-title">Rekap Hasil Latihan TKA</h2>
+        <p class="section-sub" id="recap-student">—</p>
+        <div class="card">
+          <table class="recap-table">
+            <thead><tr><th>Mata Pelajaran</th><th style="text-align:right">Nilai</th></tr></thead>
+            <tbody>
+              <tr><td>Matematika</td><td class="score-cell" id="recap-math">—</td></tr>
+              <tr><td>Bahasa Indonesia</td><td class="score-cell" id="recap-indo">—</td></tr>
+            </tbody>
+          </table>
+          <div class="recap-total"><span>Rata-rata</span><span class="val" id="recap-avg">—</span></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn amber" id="btn-download" type="button">Unduh Hasil (JPG)</button>
+          <button class="btn secondary" id="btn-recap-retry" type="button">Ulangi Semua</button>
+        </div>
+        <div class="btn-row">
+          <button class="btn" id="btn-recap-menu" type="button">Kembali ke Menu</button>
+        </div>
+        <p class="footer-note">Hasil unduhan berupa gambar rekap nilai untuk disimpan atau ditunjukkan ke orang tua / guru.</p>
+      </section>
+
+    </div>
+
+    <script>
+      /* ================= DATA SOAL ================= */
+      var SUBJECTS = {
+        math: {
+          id: "math",
+          name: "Matematika",
+          desc: "Stimulus \u201CTaman Sekolah\u201D · geometri, biaya, dan skala denah",
+          stimulusTag: "Stimulus Matematika",
+          stimulusTitle: "Taman Sekolah",
+          stimulusHTML:
+            "<p>Taman sekolah berbentuk persegi panjang berukuran 40 m \u00D7 25 m. Di tengah taman terdapat kolam berbentuk lingkaran dengan diameter 14 m (gunakan \u03C0 = 22/7). Sekeliling taman akan dipasang pagar dengan biaya Rp150.000,00 per meter. Seluruh area taman di luar kolam akan ditanami rumput dengan biaya Rp45.000,00 per m\u00B2. Pada denah, panjang taman digambar 8 cm.</p>",
+          questions: [
+            {
+              text: "Luas kolam yang berbentuk lingkaran adalah \u2026",
+              options: ["154 m\u00B2", "616 m\u00B2", "44 m\u00B2", "308 m\u00B2"],
+              correct: "154 m\u00B2"
+            },
+            {
+              text: "Luas area taman yang ditanami rumput adalah \u2026",
+              options: ["1.000 m\u00B2", "846 m\u00B2", "692 m\u00B2", "1.154 m\u00B2"],
+              correct: "846 m\u00B2"
+            },
+            {
+              text: "Biaya yang dibutuhkan untuk memasang pagar di sekeliling taman adalah \u2026",
+              options: ["Rp9.750.000,00", "Rp15.000.000,00", "Rp19.500.000,00", "Rp150.000.000,00"],
+              correct: "Rp19.500.000,00"
+            },
+            {
+              text: "Biaya yang dibutuhkan untuk menanami rumput di seluruh area taman di luar kolam adalah \u2026",
+              options: ["Rp45.000.000,00", "Rp6.930.000,00", "Rp38.700.000,00", "Rp38.070.000,00"],
+              correct: "Rp38.070.000,00"
+            },
+            {
+              text: "Lebar taman pada denah adalah \u2026",
+              options: ["3,2 cm", "5 cm", "6,4 cm", "10 cm"],
+              correct: "5 cm"
+            }
+          ]
+        },
+        indo: {
+          id: "indo",
+          name: "Bahasa Indonesia",
+          desc: "Stimulus teks eksposisi \u201CBank Sampah Sekolah\u201D · ide pokok, makna kata, dan simpulan",
+          stimulusTag: "Stimulus Bahasa Indonesia",
+          stimulusTitle: "Bank Sampah Sekolah",
+          stimulusHTML:
+            "<p>Bank Sampah Sekolah adalah program pengelolaan sampah yang dijalankan oleh siswa, guru, dan petugas kebersihan di lingkungan sekolah. Melalui program ini, sampah yang biasanya langsung dibuang kini dipilah dan dimanfaatkan kembali sehingga memiliki nilai guna dan nilai ekonomi. Tujuan utama bank sampah adalah menumbuhkan kepedulian siswa terhadap kebersihan lingkungan sekaligus mengurangi jumlah sampah yang berakhir di tempat pembuangan akhir. Selain itu, program ini melatih siswa untuk bertanggung jawab, disiplin, dan terbiasa menabung dari hasil penjualan sampah yang masih dapat didaur ulang.</p>" +
+            "<p>Cara kerja bank sampah cukup sederhana. Setiap hari, siswa memilah sampah menjadi dua kelompok, yaitu sampah organik dan sampah anorganik. Sampah organik, seperti sisa makanan dan daun kering, akan mengurai secara alami di dalam tanah dan dapat diolah menjadi kompos. Sementara itu, sampah anorganik, seperti botol plastik, kertas, dan kaleng, dikumpulkan lalu ditimbang oleh petugas. Hasil timbangan dicatat dalam buku tabungan sampah milik setiap siswa. Kegiatan aktifitas pemilahan ini dilakukan secara bergiliran oleh setiap kelas sesuai jadwal yang telah ditentukan. Setelah terkumpul banyak, sampah anorganik dijual kepada pengepul dan uangnya masuk sebagai saldo tabungan siswa.</p>" +
+            "<p>Sejak program ini berjalan, volume sampah sekolah berkurang cukup banyak karena sebagian besar sampah anorganik berhasil didaur ulang menjadi barang berguna, seperti pot bunga, tas, dan hiasan kelas. Lingkungan sekolah pun menjadi lebih bersih dan sehat. Oleh karena itu, mari kita dukung Bank Sampah Sekolah dengan rajin memilah sampah setiap hari agar sekolah kita tetap bersih dan lestari.</p>",
+          questions: [
+            {
+              text: "Ide pokok paragraf kedua teks tersebut adalah \u2026",
+              options: [
+                "Tujuan didirikannya bank sampah di sekolah",
+                "Cara kerja bank sampah, mulai dari pemilahan sampah hingga pencatatan tabungan",
+                "Dampak bank sampah terhadap kebersihan lingkungan sekolah",
+                "Jenis-jenis sampah yang ditemukan di lingkungan sekolah"
+              ],
+              correct: "Cara kerja bank sampah, mulai dari pemilahan sampah hingga pencatatan tabungan"
+            },
+            {
+              text: "Informasi yang sesuai dengan isi teks adalah \u2026",
+              options: [
+                "Bank sampah hanya dikelola oleh guru dan petugas kebersihan",
+                "Sampah organik dijual kepada pengepul sebagai tabungan siswa",
+                "Sampah organik dapat diolah menjadi kompos",
+                "Siswa menabung uang tunai langsung di bank sampah sekolah"
+              ],
+              correct: "Sampah organik dapat diolah menjadi kompos"
+            },
+            {
+              text: "Makna kata \u201Cmengurai\u201D pada paragraf kedua teks tersebut adalah \u2026",
+              options: [
+                "Mengumpulkan menjadi satu tempat",
+                "Terpecah menjadi bagian-bagian kecil secara alami",
+                "Menimbang dengan alat khusus",
+                "Mengolah menjadi barang kerajinan"
+              ],
+              correct: "Terpecah menjadi bagian-bagian kecil secara alami"
+            },
+            {
+              text: "Simpulan isi teks tersebut adalah \u2026",
+              options: [
+                "Bank sampah membuat sampah bermanfaat, mengurangi volume sampah sekolah, dan melatih kepedulian siswa terhadap lingkungan",
+                "Bank sampah adalah satu-satunya cara membuat sekolah menjadi bersih",
+                "Siswa wajib menjual sampah anorganik setiap hari kepada pengepul",
+                "Sampah organik lebih berharga daripada sampah anorganik"
+              ],
+              correct: "Bank sampah membuat sampah bermanfaat, mengurangi volume sampah sekolah, dan melatih kepedulian siswa terhadap lingkungan"
+            },
+            {
+              text: "Dalam teks terdapat kata tidak baku \u201Caktifitas\u201D. Bentuk baku kata tersebut adalah \u2026",
+              options: ["Aktipitas", "Aktifitas", "Aktivitas", "Aktivity"],
+              correct: "Aktivitas"
+            }
+          ]
+        }
+      };
+      var SUBJECT_ORDER = ["math", "indo"];
+      var LETTERS = ["A", "B", "C", "D"];
+
+      /* ================= STATE ================= */
+      var state = {
+        nama: "",
+        sekolah: "",
+        scores: { math: null, indo: null },
+        current: null,          // subject id yang sedang dibuka
+        shuffled: {},           // { subjectId: [ {text, options:[...], correct} ] }
+        answers: {},            // { subjectId: [chosenText|null x5] }
+        submittedDetail: {}     // { subjectId: {score, answers:[...] } }
+      };
+
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = a[i]; a[i] = a[j]; a[j] = t;
+        }
+        return a;
+      }
+
+      function prepareAttempt(subjectId) {
+        var subj = SUBJECTS[subjectId];
+        state.shuffled[subjectId] = subj.questions.map(function (q) {
+          return { text: q.text, options: shuffle(q.options), correct: q.correct };
+        });
+        state.answers[subjectId] = [null, null, null, null, null];
+      }
+
+      /* ================= NAVIGASI ================= */
+      function showScreen(id) {
+        var screens = document.querySelectorAll(".screen");
+        for (var i = 0; i < screens.length; i++) screens[i].classList.remove("active");
+        document.getElementById(id).classList.add("active");
+        window.scrollTo(0, 0);
+      }
+
+      /* ================= LAYAR AWAL ================= */
+      document.getElementById("form-start").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var nama = document.getElementById("input-nama").value.trim();
+        var sekolah = document.getElementById("input-sekolah").value.trim();
+        var ok = true;
+        document.getElementById("field-nama").classList.toggle("invalid", !nama);
+        document.getElementById("field-sekolah").classList.toggle("invalid", !sekolah);
+        if (!nama || !sekolah) ok = false;
+        if (!ok) return;
+        state.nama = nama;
+        state.sekolah = sekolah;
+        renderMenu();
+        showScreen("screen-menu");
+      });
+      document.getElementById("input-nama").addEventListener("input", function () {
+        document.getElementById("field-nama").classList.remove("invalid");
+      });
+      document.getElementById("input-sekolah").addEventListener("input", function () {
+        document.getElementById("field-sekolah").classList.remove("invalid");
+      });
+      document.getElementById("btn-ganti-identitas").addEventListener("click", function () {
+        showScreen("screen-start");
+      });
+
+      /* ================= MENU ================= */
+      var ICONS = {
+        math: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="12" x2="8.01" y2="12"/><line x1="12" y1="12" x2="12.01" y2="12"/><line x1="16" y1="12" x2="16.01" y2="12"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="12" y1="16" x2="12.01" y2="16"/><line x1="16" y1="16" x2="16.01" y2="16"/></svg>',
+        indo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>'
+      };
+
+      function renderMenu() {
+        document.getElementById("avatar-initial").textContent = (state.nama.charAt(0) || "Z").toUpperCase();
+        document.getElementById("menu-nama").textContent = state.nama;
+        document.getElementById("menu-sekolah").textContent = state.sekolah;
+        var list = document.getElementById("subject-list");
+        list.innerHTML = "";
+        SUBJECT_ORDER.forEach(function (id) {
+          var subj = SUBJECTS[id];
+          var done = state.scores[id] !== null;
+          var card = document.createElement("div");
+          card.className = "subject-card";
+          var html =
+            '<div class="subject-head">' +
+              '<div class="subject-icon icon-' + id + '">' + ICONS[id] + "</div>" +
+              "<div><h3>" + subj.name + "</h3><p>" + subj.desc + "</p></div>" +
+              '<span class="status-pill' + (done ? " done" : "") + '">' + (done ? "Selesai" : "Belum dikerjakan") + "</span>" +
+            "</div>";
+          if (done) {
+            html += '<div class="subject-score">' + state.scores[id] + '<small> / 100</small></div>';
+          }
+          html += '<button class="btn' + (done ? " secondary" : "") + '" type="button" data-start="' + id + '">' +
+            (done ? "Ulangi (pilihan jawaban diacak lagi)" : "Mulai Kerjakan") + "</button>";
+          card.innerHTML = html;
+          list.appendChild(card);
+        });
+        var btns = list.querySelectorAll("[data-start]");
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].addEventListener("click", function () {
+            startSubject(this.getAttribute("data-start"));
+          });
+        }
+        var slot = document.getElementById("menu-recap-slot");
+        if (state.scores.math !== null && state.scores.indo !== null) {
+          slot.innerHTML =
+            '<div class="card" style="text-align:center">' +
+            "<strong style=\"font-size:1.05rem\">Kedua mata pelajaran sudah selesai!</strong>" +
+            '<p style="color:var(--ink-soft);margin:8px 0 14px">Lihat rekap nilai dan unduh hasilnya sebagai gambar.</p>' +
+            '<button class="btn amber" type="button" id="btn-menu-recap">Lihat Rekap &amp; Unduh Hasil</button></div>';
+          document.getElementById("btn-menu-recap").addEventListener("click", openRecap);
+        } else {
+          slot.innerHTML = "";
+        }
+      }
+
+      /* ================= QUIZ ================= */
+      function startSubject(subjectId) {
+        state.current = subjectId;
+        state.scores[subjectId] = null;
+        delete state.submittedDetail[subjectId];
+        prepareAttempt(subjectId);
+        renderQuiz();
+        showScreen("screen-quiz");
+      }
+
+      function renderQuiz() {
+        var id = state.current;
+        var subj = SUBJECTS[id];
+        var qs = state.shuffled[id];
+        document.getElementById("quiz-title").textContent = subj.name;
+        document.getElementById("quiz-stimulus").innerHTML =
+          '<span class="stim-tag">' + subj.stimulusTag + "</span><h3>" + subj.stimulusTitle + "</h3>" +
+          '<div class="stim-body">' + subj.stimulusHTML + "</div>";
+        var box = document.getElementById("quiz-questions");
+        box.innerHTML = "";
+        qs.forEach(function (q, qi) {
+          var card = document.createElement("div");
+          card.className = "question";
+          var html = '<div class="q-num">Soal ' + (qi + 1) + " dari 5</div>" +
+            '<p class="q-text">' + q.text + "</p>" +
+            '<div class="options">';
+          q.options.forEach(function (opt, oi) {
+            html += '<button class="opt" type="button" data-q="' + qi + '" data-opt="' + oi + '">' +
+              '<span class="letter">' + LETTERS[oi] + "</span><span>" + opt + "</span></button>";
+          });
+          html += "</div>";
+          card.innerHTML = html;
+          box.appendChild(card);
+        });
+        var opts = box.querySelectorAll(".opt");
+        for (var i = 0; i < opts.length; i++) {
+          opts[i].addEventListener("click", function () {
+            var qi = parseInt(this.getAttribute("data-q"), 10);
+            var oi = parseInt(this.getAttribute("data-opt"), 10);
+            state.answers[state.current][qi] = state.shuffled[state.current][qi].options[oi];
+            var siblings = box.querySelectorAll('.opt[data-q="' + qi + '"]');
+            for (var k = 0; k < siblings.length; k++) siblings[k].classList.remove("selected");
+            this.classList.add("selected");
+            updateProgress();
+          });
+        }
+        updateProgress();
+      }
+
+      function answeredCount() {
+        return state.answers[state.current].filter(function (a) { return a !== null; }).length;
+      }
+
+      function updateProgress() {
+        var n = answeredCount();
+        document.getElementById("progress-label").textContent = n + " dari 5 soal terjawab";
+        document.getElementById("progress-fill").style.width = (n / 5 * 100) + "%";
+        var btn = document.getElementById("btn-submit");
+        btn.disabled = n < 5;
+        document.getElementById("submit-hint").textContent =
+          n < 5 ? "Masih ada " + (5 - n) + " soal yang belum dijawab." : "Semua soal sudah dijawab. Silakan kumpulkan.";
+      }
+
+      document.getElementById("btn-back-menu").addEventListener("click", function () {
+        renderMenu();
+        showScreen("screen-menu");
+      });
+
+      document.getElementById("btn-submit").addEventListener("click", function () {
+        var id = state.current;
+        var qs = state.shuffled[id];
+        var score = 0;
+        qs.forEach(function (q, i) {
+          if (state.answers[id][i] === q.correct) score += 20;
+        });
+        state.scores[id] = score;
+        state.submittedDetail[id] = { score: score, answers: state.answers[id].slice() };
+        renderResult(id);
+        showScreen("screen-result");
+      });
+
+      /* ================= HASIL PER MAPEL ================= */
+      function renderResult(id) {
+        var subj = SUBJECTS[id];
+        var detail = state.submittedDetail[id];
+        var qs = state.shuffled[id];
+        document.getElementById("result-score").textContent = detail.score;
+        document.getElementById("result-caption").textContent =
+          "Nilai " + subj.name + " · " + (detail.score / 20) + " dari 5 soal benar";
+        var box = document.getElementById("result-questions");
+        box.innerHTML = "";
+        qs.forEach(function (q, qi) {
+          var chosen = detail.answers[qi];
+          var isOk = chosen === q.correct;
+          var card = document.createElement("div");
+          card.className = "question";
+          var html = '<div class="q-num">Soal ' + (qi + 1) + " dari 5</div>" +
+            '<p class="q-text">' + q.text + "</p>" +
+            '<div class="options">';
+          q.options.forEach(function (opt, oi) {
+            var cls = "opt";
+            var dis = " disabled";
+            if (opt === chosen) cls += isOk ? " mark-ok" : " mark-bad";
+            html += '<button class="' + cls + '" type="button"' + dis + ">" +
+              '<span class="letter">' + LETTERS[oi] + "</span><span>" + opt + "</span></button>";
+          });
+          html += "</div>";
+          var chosenIdx = q.options.indexOf(chosen);
+          html += '<div class="verdict show ' + (isOk ? "ok" : "bad") + '">' +
+            (isOk ? "&#10003; Benar" : "&#10007; Salah") +
+            '<span class="chosen-note">Jawabanmu: ' + LETTERS[chosenIdx] + ". " + chosen + "</span></div>";
+          card.innerHTML = html;
+          box.appendChild(card);
+        });
+      }
+
+      document.getElementById("btn-result-retry").addEventListener("click", function () {
+        startSubject(state.current);
+      });
+      document.getElementById("btn-result-menu").addEventListener("click", function () {
+        if (state.scores.math !== null && state.scores.indo !== null) {
+          openRecap();
+        } else {
+          renderMenu();
+          showScreen("screen-menu");
+        }
+      });
+
+      /* ================= REKAP & UNDUH JPG ================= */
+      function openRecap() {
+        document.getElementById("recap-student").textContent = state.nama + " · " + state.sekolah;
+        document.getElementById("recap-math").textContent = state.scores.math;
+        document.getElementById("recap-indo").textContent = state.scores.indo;
+        var avg = (state.scores.math + state.scores.indo) / 2;
+        document.getElementById("recap-avg").textContent = (avg % 1 === 0 ? avg : avg.toFixed(1));
+        showScreen("screen-recap");
+      }
+
+      document.getElementById("btn-recap-menu").addEventListener("click", function () {
+        renderMenu();
+        showScreen("screen-menu");
+      });
+      document.getElementById("btn-recap-retry").addEventListener("click", function () {
+        state.scores = { math: null, indo: null };
+        state.submittedDetail = {};
+        renderMenu();
+        showScreen("screen-menu");
+      });
+
+      document.getElementById("btn-download").addEventListener("click", function () {
+        var W = 900, H = 1080;
+        var canvas = document.createElement("canvas");
+        canvas.width = W; canvas.height = H;
+        var ctx = canvas.getContext("2d");
+        // Latar
+        ctx.fillStyle = "#eef4f1"; ctx.fillRect(0, 0, W, H);
+        // Kartu
+        ctx.fillStyle = "#ffffff";
+        roundRect(ctx, 50, 50, W - 100, H - 100, 28); ctx.fill();
+        ctx.strokeStyle = "#d7e2dc"; ctx.lineWidth = 3;
+        roundRect(ctx, 50, 50, W - 100, H - 100, 28); ctx.stroke();
+        // Pita judul
+        ctx.fillStyle = "#0e6b5c";
+        roundRect(ctx, 50, 50, W - 100, 190, 28); ctx.fill();
+        ctx.fillRect(50, 190, W - 100, 50);
+        ctx.fillStyle = "#ffffff";
+        ctx.textAlign = "center";
+        ctx.font = "800 44px 'Plus Jakarta Sans', Arial, sans-serif";
+        ctx.fillText("Latihan TKA", W / 2, 140);
+        ctx.font = "600 27px 'Plus Jakarta Sans', Arial, sans-serif";
+        ctx.fillText("Tes Kemampuan Akademik", W / 2, 192);
+        // Identitas
+        ctx.fillStyle = "#16241f";
+        ctx.font = "800 40px 'Plus Jakarta Sans', Arial, sans-serif";
+        wrapCenter(ctx, state.nama, W / 2, 330, W - 220);
+        ctx.fillStyle = "#4a5d55";
+        ctx.font = "600 30px 'Plus Jakarta Sans', Arial, sans-serif";
+        wrapCenter(ctx, state.sekolah, W / 2, 382, W - 220);
+        ctx.font = "500 25px 'Plus Jakarta Sans', Arial, sans-serif";
+        var now = new Date();
+        var tgl = now.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+        ctx.fillText(tgl, W / 2, 428);
+        // Garis
+        ctx.strokeStyle = "#d7e2dc"; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(110, 478); ctx.lineTo(W - 110, 478); ctx.stroke();
+        // Baris nilai
+        var rows = [
+          ["Matematika", state.scores.math],
+          ["Bahasa Indonesia", state.scores.indo]
+        ];
+        var y = 580;
+        rows.forEach(function (r) {
+          ctx.textAlign = "left";
+          ctx.fillStyle = "#16241f";
+          ctx.font = "700 36px 'Plus Jakarta Sans', Arial, sans-serif";
+          ctx.fillText(r[0], 110, y);
+          ctx.textAlign = "right";
+          ctx.fillStyle = "#0a5246";
+          ctx.font = "800 52px 'Plus Jakarta Sans', Arial, sans-serif";
+          ctx.fillText(String(r[1]), W - 110, y);
+          ctx.fillStyle = "#4a5d55";
+          ctx.font = "600 24px 'Plus Jakarta Sans', Arial, sans-serif";
+          ctx.fillText("/ 100", W - 110, y + 34);
+          ctx.textAlign = "center";
+          y += 150;
+        });
+        ctx.strokeStyle = "#d7e2dc"; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(110, y - 90); ctx.lineTo(W - 110, y - 90); ctx.stroke();
+        // Rata-rata
+        var avg = (state.scores.math + state.scores.indo) / 2;
+        ctx.fillStyle = "#16241f";
+        ctx.font = "800 36px 'Plus Jakarta Sans', Arial, sans-serif";
+        ctx.textAlign = "left";
+        ctx.fillText("Rata-rata", 110, y + 30);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#0a5246";
+        ctx.font = "800 64px 'Plus Jakarta Sans', Arial, sans-serif";
+        ctx.fillText(avg % 1 === 0 ? String(avg) : avg.toFixed(1), W - 110, y + 34);
+        ctx.fillStyle = "#4a5d55";
+        ctx.font = "500 24px 'Plus Jakarta Sans', Arial, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("Tetap semangat belajar dan berlatih!", W / 2, H - 110);
+        // Unduh
+        var a = document.createElement("a");
+        a.download = "hasil-latihan-tka-" + state.nama.replace(/\s+/g, "-").toLowerCase() + ".jpg";
+        a.href = canvas.toDataURL("image/jpeg", 0.92);
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      });
+
+      function roundRect(ctx, x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+        ctx.closePath();
+      }
+      function wrapCenter(ctx, text, cx, y, maxW) {
+        if (ctx.measureText(text).width <= maxW) { ctx.fillText(text, cx, y); return; }
+        var t = text;
+        while (t.length > 0 && ctx.measureText(t + "\u2026").width > maxW) t = t.slice(0, -1);
+        ctx.fillText(t.trim() + "\u2026", cx, y);
+      }
+    </script>
+  </body>
+</html>
