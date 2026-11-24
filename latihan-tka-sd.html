@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Latihan TKA SD Asma</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+    <style>
+      :root{
+        --bg:#f4f8f1;
+        --surface:#ffffff;
+        --surface-2:#eef5e9;
+        --ink:#22301f;
+        --ink-soft:#55624f;
+        --line:#d7e3d0;
+        --brand:#2e7d32;
+        --brand-dark:#1b5e20;
+        --brand-soft:#e3f1de;
+        --accent:#e8a13a;
+        --accent-soft:#fdf0d7;
+        --stimulus-bg:#fff8e6;
+        --stimulus-line:#ecd9a0;
+        --stimulus-ink:#3d3413;
+        --ok:#2e7d32;
+        --ok-bg:#e6f4e3;
+        --bad:#b3261e;
+        --bad-bg:#fdecea;
+        --shadow:0 2px 10px rgba(34,48,31,.08);
+        --radius:16px;
+      }
+      @media (prefers-color-scheme: dark){
+        :root{
+          --bg:#141a13;
+          --surface:#1f281e;
+          --surface-2:#26321f;
+          --ink:#eef4ea;
+          --ink-soft:#b9c6b2;
+          --line:#3a4a36;
+          --brand:#7cc47f;
+          --brand-dark:#a5d6a7;
+          --brand-soft:#2a3d28;
+          --accent:#eebd6d;
+          --accent-soft:#3d3420;
+          --stimulus-bg:#332d18;
+          --stimulus-line:#6b5c2e;
+          --stimulus-ink:#f5ecd2;
+          --ok:#8fd694;
+          --ok-bg:#24402a;
+          --bad:#f2a49e;
+          --bad-bg:#472622;
+          --shadow:0 2px 10px rgba(0,0,0,.35);
+        }
+      }
+      *{box-sizing:border-box}
+      html{-webkit-text-size-adjust:100%}
+      body{
+        margin:0;
+        background:var(--bg);
+        color:var(--ink);
+        font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+        font-size:17px;
+        line-height:1.55;
+      }
+      button,[role="button"],select,summary,input:not([type="checkbox"],[type="radio"]){min-height:2.75rem}
+      .wrap{max-width:760px;margin:0 auto;padding:20px 16px 56px}
+      h1,h2,h3{font-family:"Baloo 2","Nunito",sans-serif;line-height:1.2;margin:0}
+      .hidden{display:none !important}
+
+      /* ---------- Start screen ---------- */
+      .hero{
+        background:var(--surface);
+        border:1px solid var(--line);
+        border-radius:20px;
+        box-shadow:var(--shadow);
+        padding:28px 22px;
+        margin-top:10px;
+      }
+      .hero .sprout{font-size:2.4rem;line-height:1}
+      .hero h1{font-size:1.75rem;font-weight:800;margin:10px 0 6px}
+      .hero p.lead{color:var(--ink-soft);margin:0 0 4px;font-size:1.02rem}
+      .hero .for{font-weight:800;color:var(--brand-dark)}
+      .field{margin-top:18px}
+      .field label{display:block;font-weight:800;margin-bottom:6px;font-size:.98rem}
+      .field input{
+        width:100%;
+        padding:12px 14px;
+        font:inherit;
+        font-size:1.05rem;
+        color:var(--ink);
+        background:var(--surface-2);
+        border:2px solid var(--line);
+        border-radius:12px;
+      }
+      .field input:focus{outline:none;border-color:var(--brand)}
+      .field .err{color:var(--bad);font-weight:700;font-size:.92rem;margin-top:6px;min-height:1.2em}
+      .btn{
+        display:inline-flex;align-items:center;justify-content:center;gap:8px;
+        font-family:"Baloo 2","Nunito",sans-serif;
+        font-weight:700;font-size:1.08rem;
+        border:none;border-radius:14px;
+        padding:12px 22px;cursor:pointer;
+        min-height:52px;
+        transition:transform .08s ease, opacity .15s ease;
+      }
+      .btn:active{transform:scale(.98)}
+      .btn-primary{background:var(--brand);color:#fff;width:100%;margin-top:14px}
+      @media (prefers-color-scheme: dark){.btn-primary{color:#10220f}}
+      .btn-primary:disabled{background:var(--line);color:var(--ink-soft);cursor:not-allowed}
+      .btn-ghost{background:var(--surface);color:var(--brand-dark);border:2px solid var(--brand)}
+      .btn-soft{background:var(--brand-soft);color:var(--brand-dark)}
+      .btn-block{width:100%}
+      .howto{
+        margin-top:20px;background:var(--surface-2);
+        border-radius:14px;padding:14px 16px;font-size:.97rem;
+      }
+      .howto h2{font-size:1.05rem;margin-bottom:6px}
+      .howto ul{margin:0;padding-left:20px;color:var(--ink-soft)}
+      .howto li{margin:3px 0}
+
+      /* ---------- Menu screen ---------- */
+      .student-bar{
+        display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;
+        background:var(--surface);border:1px solid var(--line);
+        border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);
+      }
+      .student-bar .nm{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.15rem}
+      .student-bar .sc{color:var(--ink-soft);font-weight:600}
+      .menu-head{margin:22px 0 4px}
+      .menu-head h2{font-size:1.45rem;font-weight:800}
+      .menu-head p{color:var(--ink-soft);margin:4px 0 0}
+      .subject-grid{display:grid;gap:14px;margin-top:16px}
+      @media (min-width:640px){.subject-grid{grid-template-columns:1fr 1fr}}
+      .subject-card{
+        background:var(--surface);border:1px solid var(--line);
+        border-radius:18px;box-shadow:var(--shadow);padding:20px;
+        display:flex;flex-direction:column;gap:8px;
+      }
+      .subject-card .ic{
+        width:52px;height:52px;border-radius:14px;
+        display:flex;align-items:center;justify-content:center;font-size:1.7rem;
+      }
+      .subject-card.math .ic{background:var(--accent-soft)}
+      .subject-card.indo .ic{background:var(--brand-soft)}
+      .subject-card h3{font-size:1.3rem;font-weight:800}
+      .subject-card p{margin:0;color:var(--ink-soft);font-size:.97rem;flex:1}
+      .score-badge{
+        align-self:flex-start;font-weight:800;font-size:.95rem;
+        background:var(--ok-bg);color:var(--ok);
+        border-radius:999px;padding:5px 14px;
+      }
+      .recap{
+        margin-top:22px;background:var(--surface);
+        border:2px solid var(--brand);border-radius:18px;
+        padding:22px;box-shadow:var(--shadow);
+      }
+      .recap h2{font-size:1.4rem;font-weight:800;text-align:center}
+      .recap .who{text-align:center;color:var(--ink-soft);font-weight:700;margin:4px 0 14px}
+      .recap-rows{display:grid;gap:10px}
+      .recap-row{
+        display:flex;justify-content:space-between;align-items:center;
+        background:var(--surface-2);border-radius:12px;padding:12px 16px;
+      }
+      .recap-row .lbl{font-weight:800}
+      .recap-row .val{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.35rem;color:var(--brand-dark)}
+      .recap-row.total{background:var(--brand-soft)}
+      .recap .actions{display:grid;gap:10px;margin-top:18px}
+      @media (min-width:560px){.recap .actions{grid-template-columns:1fr 1fr}}
+
+      /* ---------- Quiz screen ---------- */
+      .quiz-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+      .back-btn{
+        background:var(--surface);border:1px solid var(--line);color:var(--ink);
+        border-radius:12px;padding:8px 14px;font:inherit;font-weight:800;cursor:pointer;min-height:44px;
+      }
+      .quiz-top h2{font-size:1.35rem;font-weight:800}
+      .progress-note{color:var(--ink-soft);font-weight:700;font-size:.93rem;margin-left:auto;text-align:right}
+      .stimulus{
+        background:var(--stimulus-bg);
+        border:2px solid var(--stimulus-line);
+        border-radius:18px;padding:20px;color:var(--stimulus-ink);
+      }
+      .stimulus .stim-tag{
+        display:inline-block;font-family:"Baloo 2",sans-serif;font-weight:700;font-size:.82rem;
+        letter-spacing:.04em;text-transform:uppercase;
+        background:var(--accent);color:#3d2c05;border-radius:999px;padding:3px 12px;margin-bottom:10px;
+      }
+      .stimulus h3{font-size:1.3rem;font-weight:800;margin-bottom:8px}
+      .stimulus p{margin:0 0 10px}
+      .stimulus p:last-child{margin-bottom:0}
+      .stimulus table{
+        width:100%;border-collapse:collapse;margin:10px 0 14px;
+        background:var(--surface);color:var(--ink);border-radius:12px;overflow:hidden;
+        font-size:.98rem;
+      }
+      .stimulus th,.stimulus td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line)}
+      .stimulus th{background:var(--brand-soft);color:var(--brand-dark);font-weight:800}
+      .stimulus td.num,.stimulus th.num{text-align:right;font-variant-numeric:tabular-nums}
+      .stimulus tr:last-child td{border-bottom:none}
+      .q-card{
+        background:var(--surface);border:1px solid var(--line);
+        border-radius:16px;box-shadow:var(--shadow);
+        padding:18px;margin-top:14px;
+      }
+      .q-card .q-num{
+        font-family:"Baloo 2",sans-serif;font-weight:700;font-size:.85rem;color:var(--brand-dark);
+        text-transform:uppercase;letter-spacing:.05em;
+      }
+      .q-card .q-text{font-weight:700;font-size:1.06rem;margin:4px 0 12px}
+      .opts{display:grid;gap:9px}
+      .opt{
+        display:flex;align-items:flex-start;gap:11px;
+        border:2px solid var(--line);border-radius:12px;
+        padding:12px 14px;cursor:pointer;min-height:52px;
+        background:var(--surface);font-size:1rem;
+      }
+      .opt:hover{border-color:var(--brand)}
+      .opt input{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:var(--brand)}
+      .opt .letter{
+        font-family:"Baloo 2",sans-serif;font-weight:800;flex:none;
+        width:26px;height:26px;border-radius:8px;background:var(--surface-2);
+        display:flex;align-items:center;justify-content:center;font-size:.95rem;
+      }
+      .opt.checked{border-color:var(--brand);background:var(--brand-soft)}
+      .submit-area{margin-top:20px}
+      .submit-hint{text-align:center;color:var(--ink-soft);font-weight:700;font-size:.93rem;margin-top:8px;min-height:1.3em}
+
+      /* ---------- Review ---------- */
+      .review-head{
+        background:var(--surface);border:1px solid var(--line);border-radius:18px;
+        box-shadow:var(--shadow);padding:22px;text-align:center;
+      }
+      .review-head .big-score{
+        font-family:"Baloo 2",sans-serif;font-weight:800;font-size:3rem;line-height:1;color:var(--brand-dark);
+      }
+      .review-head .of{color:var(--ink-soft);font-weight:700}
+      .review-head p.msg{margin:8px 0 0;font-weight:700}
+      .q-card.is-correct{border-color:var(--ok)}
+      .q-card.is-wrong{border-color:var(--bad)}
+      .verdict{font-weight:800;font-size:.95rem;display:inline-flex;align-items:center;gap:6px}
+      .verdict.ok{color:var(--ok)}
+      .verdict.bad{color:var(--bad)}
+      .your-answer{
+        margin-top:10px;background:var(--surface-2);border-radius:10px;
+        padding:10px 14px;font-size:.98rem;
+      }
+      .your-answer .lbl{font-weight:800;color:var(--ink-soft);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
+      .review-actions{display:grid;gap:10px;margin-top:20px}
+      @media (min-width:560px){.review-actions{grid-template-columns:1fr 1fr}}
+      .footer-note{text-align:center;color:var(--ink-soft);font-size:.9rem;margin-top:28px}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+
+      <!-- ================= START ================= -->
+      <section id="screen-start">
+        <div class="hero">
+          <div class="sprout" aria-hidden="true">🌱</div>
+          <h1>Latihan TKA (Tes Kemampuan Akademik) SD</h1>
+          <p class="lead">Latihan persiapan TKA masuk SMP untuk <span class="for">Asma — Kelas 6 SD</span></p>
+          <p class="lead">Isi nama dan sekolah dulu, lalu mulai berlatih. Semangat ya!</p>
+          <form id="form-start" novalidate>
+            <div class="field">
+              <label for="input-name">Nama</label>
+              <input id="input-name" type="text" autocomplete="name" placeholder="Tulis namamu di sini" />
+            </div>
+            <div class="field">
+              <label for="input-school">Sekolah</label>
+              <input id="input-school" type="text" autocomplete="organization" placeholder="Tulis nama sekolahmu di sini" />
+              <div class="err" id="start-err" role="alert"></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Mulai Latihan →</button>
+          </form>
+          <div class="howto">
+            <h2>Cara mengerjakan</h2>
+            <ul>
+              <li>Ada 2 mata pelajaran: <strong>Matematika</strong> dan <strong>Bahasa Indonesia</strong>. Boleh dikerjakan dalam urutan apa saja.</li>
+              <li>Setiap mata pelajaran punya <strong>1 bacaan/data (stimulus)</strong> dan <strong>5 soal</strong> pilihan ganda.</li>
+              <li>Setiap soal bernilai 20 poin, jadi nilai tertinggi adalah <strong>100</strong>.</li>
+              <li>Setelah kedua mata pelajaran selesai, kamu bisa mengunduh hasil latihanmu sebagai gambar.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= MENU ================= -->
+      <section id="screen-menu" class="hidden">
+        <div class="student-bar">
+          <span class="nm" id="bar-name"></span>
+          <span class="sc" id="bar-school"></span>
+        </div>
+        <div class="menu-head">
+          <h2>Pilih Mata Pelajaran</h2>
+          <p>Kerjakan keduanya ya. Urutannya bebas — pilih yang kamu mau dulu.</p>
+        </div>
+        <div class="subject-grid">
+          <article class="subject-card math">
+            <div class="ic" aria-hidden="true">🧮</div>
+            <h3>Matematika</h3>
+            <p>Stimulus “Bazar Amal Kelas 6” — berhitung dengan tabel harga, keuntungan, pecahan, dan keliling.</p>
+            <div class="score-badge hidden" id="badge-math"></div>
+            <button class="btn btn-primary" id="btn-math" style="margin-top:6px">Mulai Matematika</button>
+          </article>
+          <article class="subject-card indo">
+            <div class="ic" aria-hidden="true">📖</div>
+            <h3>Bahasa Indonesia</h3>
+            <p>Stimulus teks “Kebun Sayur Kelas 6” — ide pokok, isi teks, makna kata, simpulan, dan kata baku.</p>
+            <div class="score-badge hidden" id="badge-indo"></div>
+            <button class="btn btn-primary" id="btn-indo" style="margin-top:6px">Mulai Bahasa Indonesia</button>
+          </article>
+        </div>
+
+        <div class="recap hidden" id="recap">
+          <h2>🎉 Rekap Hasil Latihan</h2>
+          <p class="who" id="recap-who"></p>
+          <div class="recap-rows">
+            <div class="recap-row"><span class="lbl">🧮 Matematika</span><span class="val" id="recap-math"></span></div>
+            <div class="recap-row"><span class="lbl">📖 Bahasa Indonesia</span><span class="val" id="recap-indo"></span></div>
+            <div class="recap-row total"><span class="lbl">Rata-rata</span><span class="val" id="recap-avg"></span></div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" id="btn-download" style="margin-top:0">⬇ Unduh Hasil (JPG)</button>
+            <button class="btn btn-ghost" id="btn-restart">↻ Ulangi Latihan</button>
+          </div>
+        </div>
+        <p class="footer-note">Latihan TKA SD • Matematika &amp; Bahasa Indonesia • Masing-masing 5 soal</p>
+      </section>
+
+      <!-- ================= QUIZ ================= -->
+      <section id="screen-quiz" class="hidden">
+        <div class="quiz-top">
+          <button class="back-btn" id="btn-back-menu">← Kembali</button>
+          <h2 id="quiz-title"></h2>
+          <div class="progress-note" id="quiz-progress"></div>
+        </div>
+        <div id="quiz-stimulus"></div>
+        <div id="quiz-questions"></div>
+        <div class="submit-area">
+          <button class="btn btn-primary" id="btn-submit" disabled style="margin-top:0">Kumpulkan Jawaban</button>
+          <div class="submit-hint" id="submit-hint"></div>
+        </div>
+      </section>
+
+      <!-- ================= REVIEW ================= -->
+      <section id="screen-review" class="hidden">
+        <div class="review-head">
+          <div class="of" id="review-subject"></div>
+          <div class="big-score"><span id="review-score"></span><span style="font-size:1.4rem"> / 100</span></div>
+          <p class="msg" id="review-msg"></p>
+        </div>
+        <div id="review-questions"></div>
+        <div class="review-actions">
+          <button class="btn btn-primary" id="btn-review-menu" style="margin-top:0">Kembali ke Pilihan Mapel</button>
+          <button class="btn btn-soft hidden" id="btn-review-other"></button>
+        </div>
+      </section>
+
+    </div>
+
+    <script>
+      "use strict";
+
+      /* ================= DATA ================= */
+      var MATH_STIMULUS =
+        '<span class="stim-tag">Stimulus • Bacalah baik-baik</span>' +
+        '<h3>Bazar Amal Kelas 6</h3>' +
+        '<p>Kelas 6 mengadakan bazar amal. Berikut tabel harga barang dan jumlah yang terjual selama bazar:</p>' +
+        '<table><thead><tr><th>Barang</th><th class="num">Harga Satuan</th><th class="num">Jumlah Terjual</th></tr></thead><tbody>' +
+        '<tr><td>Nasi bungkus</td><td class="num">Rp8.000,00</td><td class="num">24</td></tr>' +
+        '<tr><td>Es teh</td><td class="num">Rp3.000,00</td><td class="num">40</td></tr>' +
+        '<tr><td>Roti</td><td class="num">Rp5.000,00</td><td class="num">32</td></tr>' +
+        '<tr><td>Buah potong</td><td class="num">Rp6.000,00</td><td class="num">20</td></tr>' +
+        '</tbody></table>' +
+        '<p>Modal awal bazar adalah <strong>Rp500.000,00</strong>.</p>' +
+        '<p>Sebanyak <strong>3/4 dari roti</strong> terjual sebelum istirahat pertama.</p>' +
+        '<p>Stan bazar berbentuk persegi panjang berukuran <strong>6 m × 4 m</strong> dan akan dipasangi pita mengelilingi stan.</p>';
+
+      var INDO_STIMULUS =
+        '<span class="stim-tag">Stimulus • Bacalah baik-baik</span>' +
+        '<h3>Kebun Sayur Kelas 6</h3>' +
+        '<p>Siswa kelas 6 memanfaatkan lahan kosong di belakang sekolah menjadi kebun sayur yang hijau dan asri. Lahan itu sebelumnya hanya ditumbuhi rumput liar dan jarang digunakan untuk kegiatan belajar siswa. Kegiatan ini dilakukan setiap hari Jumat setelah pelajaran olahraga selesai. Tujuan kegiatan ini adalah agar siswa belajar menanam sayuran sendiri, menjaga lingkungan sekolah tetap bersih, dan memahami pentingnya makan makanan sehat. Guru kelas mendampingi siswa selama kegiatan berkebun berlangsung.</p>' +
+        '<p>Setiap kelompok mendapat tugas yang berbeda-beda agar pekerjaan terasa lebih ringan. Ada kelompok yang menyemai benih kangkung dan bayam di petak tanah yang sudah digemburkan. Menyemai artinya menabur benih ke tanah agar tumbuh menjadi tanaman. Kelompok lain bertugas menyiram tanaman setiap pagi dan memberi pupuk kompos seminggu sekali. Melalui praktek langsung di kebun, siswa menjadi lebih paham cara merawat tanaman dengan baik.</p>' +
+        '<p>Setelah satu bulan, kangkung dan bayam tumbuh subur dan siap dipanen bersama-sama. Hasil panen kemudian dimasak di kantin sekolah dan dibagikan kepada siswa untuk makan siang. Siswa merasa bangga karena dapat menikmati sayur hasil kerja mereka sendiri. Mari kita jaga kebun sayur sekolah agar tetap hijau dan bermanfaat bagi semua warga sekolah.</p>';
+
+      var SUBJECTS = {
+        math: {
+          label: "Matematika",
+          stimulusTitle: "Bazar Amal Kelas 6",
+          stimulus: MATH_STIMULUS,
+          questions: [
+            {
+              q: "Hasil penjualan es teh seluruhnya adalah …",
+              options: ["Rp90.000,00", "Rp120.000,00", "Rp128.000,00", "Rp320.000,00"],
+              correct: 1
+            },
+            {
+              q: "Total hasil penjualan semua barang adalah …",
+              options: ["Rp22.000,00", "Rp496.000,00", "Rp592.000,00", "Rp1.092.000,00"],
+              correct: 2
+            },
+            {
+              q: "Keuntungan bazar, yaitu total hasil penjualan dikurangi modal awal, adalah …",
+              options: ["Rp42.000,00", "Rp92.000,00", "Rp500.000,00", "Rp592.000,00"],
+              correct: 1
+            },
+            {
+              q: "Banyak roti yang terjual sebelum istirahat pertama adalah …",
+              options: ["8 buah", "16 buah", "24 buah", "32 buah"],
+              correct: 2
+            },
+            {
+              q: "Panjang pita yang dibutuhkan untuk mengelilingi stan bazar adalah …",
+              options: ["10 m", "20 m", "24 m", "48 m"],
+              correct: 1
+            }
+          ]
+        },
+        indo: {
+          label: "Bahasa Indonesia",
+          stimulusTitle: "Kebun Sayur Kelas 6",
+          stimulus: INDO_STIMULUS,
+          questions: [
+            {
+              q: "Ide pokok paragraf pertama teks tersebut adalah …",
+              options: [
+                "Siswa kelas 6 memanfaatkan lahan kosong di belakang sekolah menjadi kebun sayur",
+                "Siswa kelas 6 memanen kangkung dan bayam yang sudah tumbuh subur",
+                "Setiap kelompok siswa mendapat tugas menyiram tanaman setiap pagi",
+                "Hasil panen kebun dimasak di kantin sekolah untuk makan siang"
+              ],
+              correct: 0
+            },
+            {
+              q: "Informasi yang sesuai dengan isi teks adalah …",
+              options: [
+                "Lahan kosong yang dimanfaatkan berada di depan sekolah",
+                "Tanaman diberi pupuk kompos setiap hari",
+                "Benih kangkung dan bayam disemai di petak tanah yang sudah digemburkan",
+                "Hasil panen kebun dijual ke pasar oleh siswa"
+              ],
+              correct: 2
+            },
+            {
+              q: "Makna kata “menyemai” dalam teks tersebut adalah …",
+              options: [
+                "menyiram tanaman dengan air",
+                "menabur benih ke tanah agar tumbuh menjadi tanaman",
+                "memanen sayur yang sudah besar",
+                "memberi pupuk pada tanaman"
+              ],
+              correct: 1
+            },
+            {
+              q: "Simpulan isi teks tersebut adalah …",
+              options: [
+                "Berkebun membuat siswa kelas 6 merasa lelah",
+                "Lahan kosong di sekolah sebaiknya dibiarkan saja",
+                "Kebun sayur sekolah bermanfaat dan hasil panennya dapat dinikmati bersama",
+                "Sayur untuk kantin sekolah dibeli dari pasar"
+              ],
+              correct: 2
+            },
+            {
+              q: "Dalam teks terdapat kata tidak baku “praktek”. Perbaikan kata tersebut yang tepat adalah …",
+              options: ["praktek", "praktikum", "praktik", "peraktik"],
+              correct: 2
+            }
+          ]
+        }
+      };
+
+      var LETTERS = ["A", "B", "C", "D"];
+
+      /* ================= STATE ================= */
+      var state = {
+        name: "",
+        school: "",
+        current: null,          // 'math' | 'indo'
+        attempt: null,          // shuffled questions for the current attempt
+        results: { math: null, indo: null }  // {score, details:[{q, chosen, isCorrect}]}
+      };
+
+      /* ================= HELPERS ================= */
+      function $(id) { return document.getElementById(id); }
+      function show(id) {
+        ["screen-start", "screen-menu", "screen-quiz", "screen-review"].forEach(function (s) {
+          $(s).classList.toggle("hidden", s !== id);
+        });
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = a[i]; a[i] = a[j]; a[j] = t;
+        }
+        return a;
+      }
+      function esc(s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+        });
+      }
+
+      /* ================= START ================= */
+      $("form-start").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var name = $("input-name").value.trim();
+        var school = $("input-school").value.trim();
+        if (!name || !school) {
+          $("start-err").textContent = "Nama dan sekolah harus diisi dulu ya 🙂";
+          return;
+        }
+        $("start-err").textContent = "";
+        state.name = name;
+        state.school = school;
+        $("bar-name").textContent = name;
+        $("bar-school").textContent = school + " • Kelas 6 SD";
+        refreshMenu();
+        show("screen-menu");
+      });
+
+      /* ================= MENU ================= */
+      function refreshMenu() {
+        ["math", "indo"].forEach(function (key) {
+          var r = state.results[key];
+          var badge = $("badge-" + key);
+          var btn = $("btn-" + key);
+          if (r) {
+            badge.textContent = "✓ Selesai • Nilai " + r.score;
+            badge.classList.remove("hidden");
+            btn.textContent = "Lihat Hasil " + SUBJECTS[key].label;
+          } else {
+            badge.classList.add("hidden");
+            btn.textContent = "Mulai " + SUBJECTS[key].label;
+          }
+        });
+        var both = state.results.math && state.results.indo;
+        $("recap").classList.toggle("hidden", !both);
+        if (both) {
+          $("recap-who").textContent = state.name + " • " + state.school;
+          $("recap-math").textContent = state.results.math.score;
+          $("recap-indo").textContent = state.results.indo.score;
+          $("recap-avg").textContent = Math.round((state.results.math.score + state.results.indo.score) / 2);
+        }
+      }
+      $("btn-math").addEventListener("click", function () {
+        if (state.results.math) { renderReview("math"); } else { startQuiz("math"); }
+      });
+      $("btn-indo").addEventListener("click", function () {
+        if (state.results.indo) { renderReview("indo"); } else { startQuiz("indo"); }
+      });
+
+      /* ================= QUIZ ================= */
+      function startQuiz(key) {
+        state.current = key;
+        var subj = SUBJECTS[key];
+        // Acak urutan pilihan jawaban untuk setiap soal
+        state.attempt = subj.questions.map(function (item) {
+          var opts = item.options.map(function (text, idx) {
+            return { text: text, isCorrect: idx === item.correct };
+          });
+          return { q: item.q, options: shuffle(opts) };
+        });
+        $("quiz-title").textContent = subj.label;
+        $("quiz-stimulus").innerHTML = '<div class="stimulus">' + subj.stimulus + "</div>";
+        var box = $("quiz-questions");
+        box.innerHTML = "";
+        state.attempt.forEach(function (item, qi) {
+          var card = document.createElement("div");
+          card.className = "q-card";
+          var html = '<div class="q-num">Soal ' + (qi + 1) + " dari 5</div>" +
+            '<div class="q-text">' + esc(item.q) + "</div>" + '<div class="opts">';
+          item.options.forEach(function (opt, oi) {
+            html += '<label class="opt">' +
+              '<input type="radio" name="q' + qi + '" value="' + oi + '" />' +
+              '<span class="letter">' + LETTERS[oi] + "</span>" +
+              "<span>" + esc(opt.text) + "</span></label>";
+          });
+          html += "</div>";
+          card.innerHTML = html;
+          box.appendChild(card);
+        });
+        box.querySelectorAll('input[type="radio"]').forEach(function (r) {
+          r.addEventListener("change", onAnswerChange);
+        });
+        updateProgress();
+        show("screen-quiz");
+      }
+
+      function answeredCount() {
+        var n = 0;
+        for (var i = 0; i < 5; i++) {
+          if (document.querySelector('input[name="q' + i + '"]:checked')) n++;
+        }
+        return n;
+      }
+      function onAnswerChange() {
+        document.querySelectorAll(".opt").forEach(function (lab) {
+          var input = lab.querySelector("input");
+          lab.classList.toggle("checked", !!input.checked);
+        });
+        updateProgress();
+      }
+      function updateProgress() {
+        var n = answeredCount();
+        $("quiz-progress").textContent = "Terjawab " + n + " / 5";
+        $("btn-submit").disabled = n < 5;
+        $("submit-hint").textContent = n < 5
+          ? "Jawab semua soal dulu ya, masih kurang " + (5 - n) + " soal."
+          : "Semua soal sudah dijawab. Klik tombol di atas untuk mengumpulkan.";
+      }
+      $("btn-back-menu").addEventListener("click", function () {
+        refreshMenu();
+        show("screen-menu");
+      });
+
+      $("btn-submit").addEventListener("click", function () {
+        if (answeredCount() < 5) return;
+        var key = state.current;
+        var details = state.attempt.map(function (item, qi) {
+          var checked = document.querySelector('input[name="q' + qi + '"]:checked');
+          var chosen = item.options[Number(checked.value)];
+          return { q: item.q, chosen: chosen.text, isCorrect: chosen.isCorrect };
+        });
+        var correctCount = details.filter(function (d) { return d.isCorrect; }).length;
+        state.results[key] = { score: correctCount * 20, details: details };
+        state.current = null;
+        state.attempt = null;
+        renderReview(key);
+      });
+
+      /* ================= REVIEW ================= */
+      function renderReview(key) {
+        var r = state.results[key];
+        var subj = SUBJECTS[key];
+        $("review-subject").textContent = "Hasil " + subj.label;
+        $("review-score").textContent = r.score;
+        var msg;
+        if (r.score === 100) msg = "Sempurna! Semua jawabanmu benar. Kerja yang hebat! 🌟";
+        else if (r.score >= 80) msg = "Hebat! Sebentar lagi sempurna, tetap semangat ya! 💪";
+        else if (r.score >= 60) msg = "Bagus! Baca lagi stimulusnya pelan-pelan, kamu pasti bisa lebih baik.";
+        else msg = "Tidak apa-apa, namanya juga latihan. Coba baca lagi stimulusnya dan ulangi latihannya ya 🙂";
+        $("review-msg").textContent = msg;
+        var box = $("review-questions");
+        box.innerHTML = "";
+        r.details.forEach(function (d, i) {
+          var card = document.createElement("div");
+          card.className = "q-card " + (d.isCorrect ? "is-correct" : "is-wrong");
+          card.innerHTML =
+            '<div class="q-num">Soal ' + (i + 1) + " dari 5</div>" +
+            '<div class="q-text">' + esc(d.q) + "</div>" +
+            '<span class="verdict ' + (d.isCorrect ? "ok" : "bad") + '">' +
+              (d.isCorrect ? "✓ Benar (+20 poin)" : "✕ Masih kurang tepat") + "</span>" +
+            '<div class="your-answer"><span class="lbl">Jawabanmu</span><br />' + esc(d.chosen) + "</div>";
+          box.appendChild(card);
+        });
+        var otherKey = key === "math" ? "indo" : "math";
+        var otherBtn = $("btn-review-other");
+        if (!state.results[otherKey]) {
+          otherBtn.textContent = "Lanjut ke " + SUBJECTS[otherKey].label + " →";
+          otherBtn.classList.remove("hidden");
+          otherBtn.onclick = function () { startQuiz(otherKey); };
+        } else {
+          otherBtn.classList.add("hidden");
+          otherBtn.onclick = null;
+        }
+        show("screen-review");
+      }
+      $("btn-review-menu").addEventListener("click", function () {
+        refreshMenu();
+        show("screen-menu");
+      });
+
+      /* ================= RESTART ================= */
+      $("btn-restart").addEventListener("click", function () {
+        state.results = { math: null, indo: null };
+        state.current = null;
+        state.attempt = null;
+        refreshMenu();
+        show("screen-menu");
+      });
+
+      /* ================= DOWNLOAD JPG ================= */
+      $("btn-download").addEventListener("click", function () {
+        var m = state.results.math.score;
+        var b = state.results.indo.score;
+        var avg = Math.round((m + b) / 2);
+        var W = 900, H = 1080;
+        var canvas = document.createElement("canvas");
+        canvas.width = W; canvas.height = H;
+        var ctx = canvas.getContext("2d");
+        // Latar
+        ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = "#2e7d32"; ctx.fillRect(0, 0, W, 190);
+        ctx.fillStyle = "#ffffff";
+        ctx.textAlign = "center";
+        ctx.font = "800 44px 'Baloo 2', sans-serif";
+        ctx.fillText("Latihan TKA SD", W / 2, 82);
+        ctx.font = "600 26px 'Nunito', sans-serif";
+        ctx.fillText("Tes Kemampuan Akademik — Persiapan Masuk SMP", W / 2, 128);
+        ctx.font = "700 24px 'Nunito', sans-serif";
+        ctx.fillText("Kelas 6 SD", W / 2, 164);
+        // Identitas
+        ctx.textAlign = "left";
+        ctx.fillStyle = "#22301f";
+        ctx.font = "700 30px 'Nunito', sans-serif";
+        ctx.fillText("Nama    : " + state.name, 70, 270);
+        ctx.fillText("Sekolah : " + state.school, 70, 322);
+        var now = new Date();
+        var tgl = now.toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+        ctx.font = "600 24px 'Nunito', sans-serif";
+        ctx.fillStyle = "#55624f";
+        ctx.fillText("Tanggal : " + tgl, 70, 368);
+        // Kotak nilai
+        function scoreBox(y, label, score, color) {
+          ctx.fillStyle = "#f4f8f1";
+          ctx.strokeStyle = "#d7e3d0"; ctx.lineWidth = 2;
+          ctx.beginPath();
+          if (ctx.roundRect) ctx.roundRect(70, y, W - 140, 130, 18); else ctx.rect(70, y, W - 140, 130);
+          ctx.fill(); ctx.stroke();
+          ctx.fillStyle = "#22301f";
+          ctx.font = "800 32px 'Nunito', sans-serif";
+          ctx.textAlign = "left";
+          ctx.fillText(label, 105, y + 80);
+          ctx.fillStyle = color;
+          ctx.font = "800 64px 'Baloo 2', sans-serif";
+          ctx.textAlign = "right";
+          ctx.fillText(String(score), W - 105, y + 88);
+          ctx.textAlign = "left";
+        }
+        scoreBox(430, "Matematika", m, "#1b5e20");
+        scoreBox(590, "Bahasa Indonesia", b, "#1b5e20");
+        // Rata-rata
+        ctx.fillStyle = "#e3f1de";
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(70, 750, W - 140, 130, 18); else ctx.rect(70, 750, W - 140, 130);
+        ctx.fill();
+        ctx.fillStyle = "#22301f";
+        ctx.font = "800 32px 'Nunito', sans-serif";
+        ctx.fillText("Rata-rata", 105, 830);
+        ctx.fillStyle = "#1b5e20";
+        ctx.font = "800 64px 'Baloo 2', sans-serif";
+        ctx.textAlign = "right";
+        ctx.fillText(String(avg), W - 105, 838);
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#55624f";
+        ctx.font = "600 24px 'Nunito', sans-serif";
+        ctx.fillText("Setiap mata pelajaran: 5 soal × 20 poin = nilai maksimal 100", W / 2, 960);
+        ctx.fillText("Terus berlatih dan tetap semangat! 🌱", W / 2, 1000);
+
+        var link = document.createElement("a");
+        var safeName = state.name.replace(/[^\w\- ]+/g, "").trim().replace(/\s+/g, "-") || "siswa";
+        link.download = "hasil-latihan-tka-sd-" + safeName + ".jpg";
+        link.href = canvas.toDataURL("image/jpeg", 0.92);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    </script>
+  </body>
+</html>
